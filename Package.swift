@@ -11,6 +11,10 @@ let package = Package(
             name: "AuctionHouse",
             targets: ["AuctionHouse"]
         ),
+        .library(
+            name: "CandyMachine",
+            targets: ["CandyMachine"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -23,6 +27,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "AuctionHouse",
+            dependencies: [
+                .product(name: "Beet", package: "beet-swift"),
+                .product(name: "BeetSolana", package: "solita-swift")
+            ]
+        ),
+        .target(
+            name: "CandyMachine",
             dependencies: [
                 .product(name: "Beet", package: "beet-swift"),
                 .product(name: "BeetSolana", package: "solita-swift")
