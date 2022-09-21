@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Solana
-import BeetSolana
 import Beet
+import BeetSolana
+import Solana
 
 
 /**
@@ -16,7 +16,7 @@ import Beet
 * @category generated
 */
 public protocol PurchasereceiptArgs {
-    
+    var purchaseReceiptDiscriminator: [UInt8] { get }
      var bookkeeper: PublicKey { get }
      var buyer: PublicKey { get }
      var seller: PublicKey { get }
@@ -28,7 +28,6 @@ public protocol PurchasereceiptArgs {
      var createdAt: Int64 { get }
 }
 
-
 /**
  * Holds the data for the {@link Purchasereceipt} Account and provides de/serialization
  * functionality for that data
@@ -37,6 +36,9 @@ public protocol PurchasereceiptArgs {
  * @category generated
  */
 public struct Purchasereceipt: PurchasereceiptArgs {
+  public static let purchaseReceiptDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+
+  public let purchaseReceiptDiscriminator: [UInt8]
   public let bookkeeper: PublicKey
   public let buyer: PublicKey
   public let seller: PublicKey
@@ -52,6 +54,7 @@ public struct Purchasereceipt: PurchasereceiptArgs {
    */
   public static func fromArgs(args: Args) -> Purchasereceipt {
     return Purchasereceipt(
+        purchaseReceiptDiscriminator: args["accountDiscriminator"] as! [UInt8],
         bookkeeper: args["bookkeeper"] as! PublicKey,
         buyer: args["buyer"] as! PublicKey,
         seller: args["seller"] as! PublicKey,
@@ -112,7 +115,8 @@ public struct Purchasereceipt: PurchasereceiptArgs {
    * @returns a tuple of the created Buffer and the offset up to which the buffer was written to store it.
    */
   public func serialize() -> ( Foundation.Data, Int ) {
-    return purchaseReceiptBeet.serialize(instance: Purchasereceipt(bookkeeper : self.bookkeeper,
+    return purchaseReceiptBeet.serialize(instance: Purchasereceipt(purchaseReceiptDiscriminator : self.purchaseReceiptDiscriminator,
+        bookkeeper : self.bookkeeper,
         buyer : self.buyer,
         seller : self.seller,
         auctionHouse : self.auctionHouse,
@@ -156,7 +160,7 @@ public struct Purchasereceipt: PurchasereceiptArgs {
    */
   public let purchaseReceiptBeet = BeetStruct(
     fields:[
-        
+        ("accountDiscriminator", (.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
         ("bookkeeper", (.init(value: .scalar(BeetPublicKey())))),
         ("buyer", (.init(value: .scalar(BeetPublicKey())))),
         ("seller", (.init(value: .scalar(BeetPublicKey())))),

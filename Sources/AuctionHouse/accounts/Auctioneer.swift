@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
-import BeetSolana
 import Solana
+import BeetSolana
+import Beet
 
 
 /**
@@ -16,12 +16,11 @@ import Solana
 * @category generated
 */
 public protocol AuctioneerArgs {
-    
+    var auctioneerDiscriminator: [UInt8] { get }
      var auctioneerAuthority: PublicKey { get }
      var auctionHouse: PublicKey { get }
      var bump: UInt8 { get }
 }
-
 
 /**
  * Holds the data for the {@link Auctioneer} Account and provides de/serialization
@@ -31,6 +30,9 @@ public protocol AuctioneerArgs {
  * @category generated
  */
 public struct Auctioneer: AuctioneerArgs {
+  public static let auctioneerDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+
+  public let auctioneerDiscriminator: [UInt8]
   public let auctioneerAuthority: PublicKey
   public let auctionHouse: PublicKey
   public let bump: UInt8
@@ -40,6 +42,7 @@ public struct Auctioneer: AuctioneerArgs {
    */
   public static func fromArgs(args: Args) -> Auctioneer {
     return Auctioneer(
+        auctioneerDiscriminator: args["accountDiscriminator"] as! [UInt8],
         auctioneerAuthority: args["auctioneerAuthority"] as! PublicKey,
         auctionHouse: args["auctionHouse"] as! PublicKey,
         bump: args["bump"] as! UInt8
@@ -94,7 +97,8 @@ public struct Auctioneer: AuctioneerArgs {
    * @returns a tuple of the created Buffer and the offset up to which the buffer was written to store it.
    */
   public func serialize() -> ( Foundation.Data, Int ) {
-    return auctioneerBeet.serialize(instance: Auctioneer(auctioneerAuthority : self.auctioneerAuthority,
+    return auctioneerBeet.serialize(instance: Auctioneer(auctioneerDiscriminator : self.auctioneerDiscriminator,
+        auctioneerAuthority : self.auctioneerAuthority,
         auctionHouse : self.auctionHouse,
         bump : self.bump))
   }
@@ -132,7 +136,7 @@ public struct Auctioneer: AuctioneerArgs {
    */
   public let auctioneerBeet = BeetStruct(
     fields:[
-        
+        ("accountDiscriminator", (.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
         ("auctioneerAuthority", (.init(value: .scalar(BeetPublicKey())))),
         ("auctionHouse", (.init(value: .scalar(BeetPublicKey())))),
         ("bump", (.init(value: .scalar(u8()))))

@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
-import BeetSolana
 import Solana
+import BeetSolana
+import Beet
 
 
 /**
@@ -16,7 +16,7 @@ import Solana
 * @category generated
 */
 public protocol AuctionhouseArgs {
-    
+    var auctionHouseDiscriminator: [UInt8] { get }
      var auctionHouseFeeAccount: PublicKey { get }
      var auctionHouseTreasury: PublicKey { get }
      var treasuryWithdrawalDestination: PublicKey { get }
@@ -36,7 +36,6 @@ public protocol AuctionhouseArgs {
      var scopes: [Bool] /* size: 7 */ { get }
 }
 
-
 /**
  * Holds the data for the {@link Auctionhouse} Account and provides de/serialization
  * functionality for that data
@@ -45,6 +44,9 @@ public protocol AuctionhouseArgs {
  * @category generated
  */
 public struct Auctionhouse: AuctionhouseArgs {
+  public static let auctionHouseDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+
+  public let auctionHouseDiscriminator: [UInt8]
   public let auctionHouseFeeAccount: PublicKey
   public let auctionHouseTreasury: PublicKey
   public let treasuryWithdrawalDestination: PublicKey
@@ -68,6 +70,7 @@ public struct Auctionhouse: AuctionhouseArgs {
    */
   public static func fromArgs(args: Args) -> Auctionhouse {
     return Auctionhouse(
+        auctionHouseDiscriminator: args["accountDiscriminator"] as! [UInt8],
         auctionHouseFeeAccount: args["auctionHouseFeeAccount"] as! PublicKey,
         auctionHouseTreasury: args["auctionHouseTreasury"] as! PublicKey,
         treasuryWithdrawalDestination: args["treasuryWithdrawalDestination"] as! PublicKey,
@@ -136,7 +139,8 @@ public struct Auctionhouse: AuctionhouseArgs {
    * @returns a tuple of the created Buffer and the offset up to which the buffer was written to store it.
    */
   public func serialize() -> ( Foundation.Data, Int ) {
-    return auctionHouseBeet.serialize(instance: Auctionhouse(auctionHouseFeeAccount : self.auctionHouseFeeAccount,
+    return auctionHouseBeet.serialize(instance: Auctionhouse(auctionHouseDiscriminator : self.auctionHouseDiscriminator,
+        auctionHouseFeeAccount : self.auctionHouseFeeAccount,
         auctionHouseTreasury : self.auctionHouseTreasury,
         treasuryWithdrawalDestination : self.treasuryWithdrawalDestination,
         feeWithdrawalDestination : self.feeWithdrawalDestination,
@@ -188,7 +192,7 @@ public struct Auctionhouse: AuctionhouseArgs {
    */
   public let auctionHouseBeet = BeetStruct(
     fields:[
-        
+        ("accountDiscriminator", (.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
         ("auctionHouseFeeAccount", (.init(value: .scalar(BeetPublicKey())))),
         ("auctionHouseTreasury", (.init(value: .scalar(BeetPublicKey())))),
         ("treasuryWithdrawalDestination", (.init(value: .scalar(BeetPublicKey())))),

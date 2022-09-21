@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import BeetSolana
 import Solana
+import Beet
 
 
 /**
@@ -16,7 +16,7 @@ import Solana
 * @category generated
 */
 public protocol BidreceiptArgs {
-    
+    var bidReceiptDiscriminator: [UInt8] { get }
      var tradeState: PublicKey { get }
      var bookkeeper: PublicKey { get }
      var auctionHouse: PublicKey { get }
@@ -32,7 +32,6 @@ public protocol BidreceiptArgs {
      var canceledAt: COption<Int64> { get }
 }
 
-
 /**
  * Holds the data for the {@link Bidreceipt} Account and provides de/serialization
  * functionality for that data
@@ -41,6 +40,9 @@ public protocol BidreceiptArgs {
  * @category generated
  */
 public struct Bidreceipt: BidreceiptArgs {
+  public static let bidReceiptDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+
+  public let bidReceiptDiscriminator: [UInt8]
   public let tradeState: PublicKey
   public let bookkeeper: PublicKey
   public let auctionHouse: PublicKey
@@ -60,6 +62,7 @@ public struct Bidreceipt: BidreceiptArgs {
    */
   public static func fromArgs(args: Args) -> Bidreceipt {
     return Bidreceipt(
+        bidReceiptDiscriminator: args["accountDiscriminator"] as! [UInt8],
         tradeState: args["tradeState"] as! PublicKey,
         bookkeeper: args["bookkeeper"] as! PublicKey,
         auctionHouse: args["auctionHouse"] as! PublicKey,
@@ -125,6 +128,7 @@ public struct Bidreceipt: BidreceiptArgs {
    */
   public func serialize() -> ( Foundation.Data, Int ) {
     return bidReceiptBeet.serialize(instance: [
+        "bidReceiptDiscriminator" : self.bidReceiptDiscriminator,
         "tradeState" : self.tradeState,
         "bookkeeper" : self.bookkeeper,
         "auctionHouse" : self.auctionHouse,
@@ -173,7 +177,7 @@ static func getMinimumBalanceForRentExemption(
    */
   public let bidReceiptBeet = FixableBeetStruct<Bidreceipt>(
     fields:[
-        
+        ("accountDiscriminator", Beet.fixedBeet(.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
         ("tradeState", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),
         ("bookkeeper", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),
         ("auctionHouse", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),

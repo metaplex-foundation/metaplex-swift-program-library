@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions

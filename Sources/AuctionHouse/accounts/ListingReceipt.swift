@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
 import BeetSolana
+import Beet
 
 
 /**
@@ -16,7 +16,7 @@ import BeetSolana
 * @category generated
 */
 public protocol ListingreceiptArgs {
-    
+    var listingReceiptDiscriminator: [UInt8] { get }
      var tradeState: PublicKey { get }
      var bookkeeper: PublicKey { get }
      var auctionHouse: PublicKey { get }
@@ -31,7 +31,6 @@ public protocol ListingreceiptArgs {
      var canceledAt: COption<Int64> { get }
 }
 
-
 /**
  * Holds the data for the {@link Listingreceipt} Account and provides de/serialization
  * functionality for that data
@@ -40,6 +39,9 @@ public protocol ListingreceiptArgs {
  * @category generated
  */
 public struct Listingreceipt: ListingreceiptArgs {
+  public static let listingReceiptDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+
+  public let listingReceiptDiscriminator: [UInt8]
   public let tradeState: PublicKey
   public let bookkeeper: PublicKey
   public let auctionHouse: PublicKey
@@ -58,6 +60,7 @@ public struct Listingreceipt: ListingreceiptArgs {
    */
   public static func fromArgs(args: Args) -> Listingreceipt {
     return Listingreceipt(
+        listingReceiptDiscriminator: args["accountDiscriminator"] as! [UInt8],
         tradeState: args["tradeState"] as! PublicKey,
         bookkeeper: args["bookkeeper"] as! PublicKey,
         auctionHouse: args["auctionHouse"] as! PublicKey,
@@ -122,6 +125,7 @@ public struct Listingreceipt: ListingreceiptArgs {
    */
   public func serialize() -> ( Foundation.Data, Int ) {
     return listingReceiptBeet.serialize(instance: [
+        "listingReceiptDiscriminator" : self.listingReceiptDiscriminator,
         "tradeState" : self.tradeState,
         "bookkeeper" : self.bookkeeper,
         "auctionHouse" : self.auctionHouse,
@@ -169,7 +173,7 @@ static func getMinimumBalanceForRentExemption(
    */
   public let listingReceiptBeet = FixableBeetStruct<Listingreceipt>(
     fields:[
-        
+        ("accountDiscriminator", Beet.fixedBeet(.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
         ("tradeState", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),
         ("bookkeeper", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),
         ("auctionHouse", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),
