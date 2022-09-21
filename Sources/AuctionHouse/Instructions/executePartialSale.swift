@@ -5,40 +5,44 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Solana
 import Beet
+import Solana
 
 /**
  * @category Instructions
- * @category ExecuteSale
+ * @category ExecutePartialSale
  * @category generated
  */
-public struct ExecuteSaleInstructionArgs{
+public struct ExecutePartialSaleInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let escrowPaymentBump: UInt8
     let freeTradeStateBump: UInt8
     let programAsSignerBump: UInt8
     let buyerPrice: UInt64
     let tokenSize: UInt64
+    let partialOrderSize: COption<UInt64>
+    let partialOrderPrice: COption<UInt64>
 }
 /**
  * @category Instructions
- * @category ExecuteSale
+ * @category ExecutePartialSale
  * @category generated
  */
-public let executeSaleStruct = FixableBeetArgsStruct<ExecuteSaleInstructionArgs>(
+public let executePartialSaleStruct = FixableBeetArgsStruct<ExecutePartialSaleInstructionArgs>(
     fields: [
         ("instructionDiscriminator", Beet.fixedBeet(.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
         ("escrowPaymentBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
         ("freeTradeStateBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
         ("programAsSignerBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
         ("buyerPrice", Beet.fixedBeet(.init(value: .scalar(u64())))),
-        ("tokenSize", Beet.fixedBeet(.init(value: .scalar(u64()))))
+        ("tokenSize", Beet.fixedBeet(.init(value: .scalar(u64())))),
+        ("partialOrderSize", Beet.fixableBeat(coption(inner: Beet.fixedBeet(.init(value: .scalar(u64())))))),
+        ("partialOrderPrice", Beet.fixableBeat(coption(inner: Beet.fixedBeet(.init(value: .scalar(u64()))))))
     ],
-    description: "ExecuteSaleInstructionArgs"
+    description: "ExecutePartialSaleInstructionArgs"
 )
 /**
-* Accounts required by the _executeSale_ instruction
+* Accounts required by the _executePartialSale_ instruction
 *
 * @property [_writable_] buyer  
 * @property [_writable_] seller  
@@ -58,10 +62,10 @@ public let executeSaleStruct = FixableBeetArgsStruct<ExecuteSaleInstructionArgs>
 * @property [_writable_] freeTradeState  
 * @property [] programAsSigner   
 * @category Instructions
-* @category ExecuteSale
+* @category ExecutePartialSale
 * @category generated
 */
-public struct ExecuteSaleInstructionAccounts {
+public struct ExecutePartialSaleInstructionAccounts {
         let buyer: PublicKey
         let seller: PublicKey
         let tokenAccount: PublicKey
@@ -85,28 +89,30 @@ public struct ExecuteSaleInstructionAccounts {
         let rent: PublicKey?
 }
 
-public let executeSaleInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 101] as [UInt8]
+public let executePartialSaleInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 101] as [UInt8]
 
 /**
-* Creates a _ExecuteSale_ instruction.
+* Creates a _ExecutePartialSale_ instruction.
 *
 * @param accounts that will be accessed while the instruction is processed
   * @param args to provide as instruction data to the program
  * 
 * @category Instructions
-* @category ExecuteSale
+* @category ExecutePartialSale
 * @category generated
 */
-public func createExecuteSaleInstruction(accounts: ExecuteSaleInstructionAccounts, 
-args: ExecuteSaleInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk")!) -> TransactionInstruction {
+public func createExecutePartialSaleInstruction(accounts: ExecutePartialSaleInstructionAccounts, 
+args: ExecutePartialSaleInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk")!) -> TransactionInstruction {
 
-    let data = executeSaleStruct.serialize(
-            instance: ["instructionDiscriminator": executeSaleInstructionDiscriminator,
+    let data = executePartialSaleStruct.serialize(
+            instance: ["instructionDiscriminator": executePartialSaleInstructionDiscriminator,
 "escrowPaymentBump": args.escrowPaymentBump,
   "freeTradeStateBump": args.freeTradeStateBump,
   "programAsSignerBump": args.programAsSignerBump,
   "buyerPrice": args.buyerPrice,
-  "tokenSize": args.tokenSize])
+  "tokenSize": args.tokenSize,
+  "partialOrderSize": args.partialOrderSize,
+  "partialOrderPrice": args.partialOrderPrice])
 
     let keys: [Account.Meta] = [
         Account.Meta(

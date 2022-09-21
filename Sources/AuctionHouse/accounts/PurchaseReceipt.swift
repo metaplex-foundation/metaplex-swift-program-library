@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
+import Solana
 import BeetSolana
 import Beet
-import Solana
 
 
 /**
@@ -15,17 +15,17 @@ import Solana
 * @category Accounts
 * @category generated
 */
-protocol PurchasereceiptArgs {
+public protocol PurchasereceiptArgs {
     
-    var bookkeeper: PublicKey { get }
-    var buyer: PublicKey { get }
-    var seller: PublicKey { get }
-    var auctionHouse: PublicKey { get }
-    var metadata: PublicKey { get }
-    var tokenSize: UInt64 { get }
-    var price: UInt64 { get }
-    var bump: UInt8 { get }
-    var createdAt: Int64 { get }
+     var bookkeeper: PublicKey { get }
+     var buyer: PublicKey { get }
+     var seller: PublicKey { get }
+     var auctionHouse: PublicKey { get }
+     var metadata: PublicKey { get }
+     var tokenSize: UInt64 { get }
+     var price: UInt64 { get }
+     var bump: UInt8 { get }
+     var createdAt: Int64 { get }
 }
 
 
@@ -37,20 +37,20 @@ protocol PurchasereceiptArgs {
  * @category generated
  */
 public struct Purchasereceipt: PurchasereceiptArgs {
-  let bookkeeper: PublicKey
-  let buyer: PublicKey
-  let seller: PublicKey
-  let auctionHouse: PublicKey
-  let metadata: PublicKey
-  let tokenSize: UInt64
-  let price: UInt64
-  let bump: UInt8
-  let createdAt: Int64
+  public let bookkeeper: PublicKey
+  public let buyer: PublicKey
+  public let seller: PublicKey
+  public let auctionHouse: PublicKey
+  public let metadata: PublicKey
+  public let tokenSize: UInt64
+  public let price: UInt64
+  public let bump: UInt8
+  public let createdAt: Int64
 
   /**
    * Creates a {@link Purchasereceipt} instance from the provided args.
    */
-  static func fromArgs(args: Args) -> Purchasereceipt {
+  public static func fromArgs(args: Args) -> Purchasereceipt {
     return Purchasereceipt(
         bookkeeper: args["bookkeeper"] as! PublicKey,
         buyer: args["buyer"] as! PublicKey,
@@ -67,7 +67,7 @@ public struct Purchasereceipt: PurchasereceiptArgs {
    * Deserializes the {@link Purchasereceipt} from the data of the provided {@link web3.AccountInfo}.
    * @returns a tuple of the account data and the offset up to which the buffer was read to obtain it.
    */
-  static func fromAccountInfo(
+  public static func fromAccountInfo(
     accountInfo: Foundation.Data,
     offset:Int=0
   ) -> ( Purchasereceipt, Int )  {
@@ -79,7 +79,7 @@ public struct Purchasereceipt: PurchasereceiptArgs {
    *
    * @throws Error if no account info is found at the address or if deserialization fails
    */
-  static func fromAccountAddress(
+  public static func fromAccountAddress(
     connection: Api,
     address: PublicKey,
     onComplete: @escaping (Result<Purchasereceipt, Error>) -> Void
@@ -101,7 +101,7 @@ public struct Purchasereceipt: PurchasereceiptArgs {
    * Deserializes the {@link Purchasereceipt} from the provided data Buffer.
    * @returns a tuple of the account data and the offset up to which the buffer was read to obtain it.
    */
-  static func deserialize(
+  public static func deserialize(
     buf: Foundation.Data,
     offset: Int = 0
   ) -> ( Purchasereceipt, Int ) {
@@ -111,7 +111,7 @@ public struct Purchasereceipt: PurchasereceiptArgs {
    * Serializes the {@link Purchasereceipt} into a Buffer.
    * @returns a tuple of the created Buffer and the offset up to which the buffer was written to store it.
    */
-  func serialize() -> ( Foundation.Data, Int ) {
+  public func serialize() -> ( Foundation.Data, Int ) {
     return purchaseReceiptBeet.serialize(instance: Purchasereceipt(bookkeeper : self.bookkeeper,
         buyer : self.buyer,
         seller : self.seller,

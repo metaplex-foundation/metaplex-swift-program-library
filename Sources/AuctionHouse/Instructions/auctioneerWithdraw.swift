@@ -10,86 +10,78 @@ import Beet
 
 /**
  * @category Instructions
- * @category Sell
+ * @category AuctioneerWithdraw
  * @category generated
  */
-public struct SellInstructionArgs{
+public struct AuctioneerWithdrawInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
-    let tradeStateBump: UInt8
-    let freeTradeStateBump: UInt8
-    let programAsSignerBump: UInt8
-    let buyerPrice: UInt64
-    let tokenSize: UInt64
+    let escrowPaymentBump: UInt8
+    let amount: UInt64
 }
 /**
  * @category Instructions
- * @category Sell
+ * @category AuctioneerWithdraw
  * @category generated
  */
-public let sellStruct = FixableBeetArgsStruct<SellInstructionArgs>(
+public let auctioneerWithdrawStruct = FixableBeetArgsStruct<AuctioneerWithdrawInstructionArgs>(
     fields: [
         ("instructionDiscriminator", Beet.fixedBeet(.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
-        ("tradeStateBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
-        ("freeTradeStateBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
-        ("programAsSignerBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
-        ("buyerPrice", Beet.fixedBeet(.init(value: .scalar(u64())))),
-        ("tokenSize", Beet.fixedBeet(.init(value: .scalar(u64()))))
+        ("escrowPaymentBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
+        ("amount", Beet.fixedBeet(.init(value: .scalar(u64()))))
     ],
-    description: "SellInstructionArgs"
+    description: "AuctioneerWithdrawInstructionArgs"
 )
 /**
-* Accounts required by the _sell_ instruction
+* Accounts required by the _auctioneerWithdraw_ instruction
 *
 * @property [] wallet  
-* @property [_writable_] tokenAccount  
-* @property [] metadata  
+* @property [_writable_] receiptAccount  
+* @property [_writable_] escrowPaymentAccount  
+* @property [] treasuryMint  
 * @property [] authority  
+* @property [**signer**] auctioneerAuthority  
 * @property [] auctionHouse  
 * @property [_writable_] auctionHouseFeeAccount  
-* @property [_writable_] sellerTradeState  
-* @property [_writable_] freeSellerTradeState  
-* @property [] programAsSigner   
+* @property [] ahAuctioneerPda   
 * @category Instructions
-* @category Sell
+* @category AuctioneerWithdraw
 * @category generated
 */
-public struct SellInstructionAccounts {
+public struct AuctioneerWithdrawInstructionAccounts {
         let wallet: PublicKey
-        let tokenAccount: PublicKey
-        let metadata: PublicKey
+        let receiptAccount: PublicKey
+        let escrowPaymentAccount: PublicKey
+        let treasuryMint: PublicKey
         let authority: PublicKey
+        let auctioneerAuthority: PublicKey
         let auctionHouse: PublicKey
         let auctionHouseFeeAccount: PublicKey
-        let sellerTradeState: PublicKey
-        let freeSellerTradeState: PublicKey
+        let ahAuctioneerPda: PublicKey
         let tokenProgram: PublicKey?
         let systemProgram: PublicKey?
-        let programAsSigner: PublicKey
+        let ataProgram: PublicKey?
         let rent: PublicKey?
 }
 
-public let sellInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 115] as [UInt8]
+public let auctioneerWithdrawInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 97] as [UInt8]
 
 /**
-* Creates a _Sell_ instruction.
+* Creates a _AuctioneerWithdraw_ instruction.
 *
 * @param accounts that will be accessed while the instruction is processed
   * @param args to provide as instruction data to the program
  * 
 * @category Instructions
-* @category Sell
+* @category AuctioneerWithdraw
 * @category generated
 */
-public func createSellInstruction(accounts: SellInstructionAccounts, 
-args: SellInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk")!) -> TransactionInstruction {
+public func createAuctioneerWithdrawInstruction(accounts: AuctioneerWithdrawInstructionAccounts, 
+args: AuctioneerWithdrawInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk")!) -> TransactionInstruction {
 
-    let data = sellStruct.serialize(
-            instance: ["instructionDiscriminator": sellInstructionDiscriminator,
-"tradeStateBump": args.tradeStateBump,
-  "freeTradeStateBump": args.freeTradeStateBump,
-  "programAsSignerBump": args.programAsSignerBump,
-  "buyerPrice": args.buyerPrice,
-  "tokenSize": args.tokenSize])
+    let data = auctioneerWithdrawStruct.serialize(
+            instance: ["instructionDiscriminator": auctioneerWithdrawInstructionDiscriminator,
+"escrowPaymentBump": args.escrowPaymentBump,
+  "amount": args.amount])
 
     let keys: [Account.Meta] = [
         Account.Meta(
@@ -98,18 +90,28 @@ args: SellInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafw
             isWritable: false
         ),
         Account.Meta(
-            publicKey: accounts.tokenAccount,
+            publicKey: accounts.receiptAccount,
             isSigner: false,
             isWritable: true
         ),
         Account.Meta(
-            publicKey: accounts.metadata,
+            publicKey: accounts.escrowPaymentAccount,
+            isSigner: false,
+            isWritable: true
+        ),
+        Account.Meta(
+            publicKey: accounts.treasuryMint,
             isSigner: false,
             isWritable: false
         ),
         Account.Meta(
             publicKey: accounts.authority,
             isSigner: false,
+            isWritable: false
+        ),
+        Account.Meta(
+            publicKey: accounts.auctioneerAuthority,
+            isSigner: true,
             isWritable: false
         ),
         Account.Meta(
@@ -123,14 +125,9 @@ args: SellInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafw
             isWritable: true
         ),
         Account.Meta(
-            publicKey: accounts.sellerTradeState,
+            publicKey: accounts.ahAuctioneerPda,
             isSigner: false,
-            isWritable: true
-        ),
-        Account.Meta(
-            publicKey: accounts.freeSellerTradeState,
-            isSigner: false,
-            isWritable: true
+            isWritable: false
         ),
         Account.Meta(
             publicKey: accounts.tokenProgram ?? PublicKey.tokenProgramId,
@@ -143,7 +140,7 @@ args: SellInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafw
             isWritable: false
         ),
         Account.Meta(
-            publicKey: accounts.programAsSigner,
+            publicKey: accounts.ataProgram ?? PublicKey.splAssociatedTokenAccountProgramId,
             isSigner: false,
             isWritable: false
         ),

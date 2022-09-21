@@ -5,90 +5,100 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
- * @category Withdraw
+ * @category AuctioneerDeposit
  * @category generated
  */
-public struct WithdrawInstructionArgs{
+public struct AuctioneerDepositInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let escrowPaymentBump: UInt8
     let amount: UInt64
 }
 /**
  * @category Instructions
- * @category Withdraw
+ * @category AuctioneerDeposit
  * @category generated
  */
-public let withdrawStruct = FixableBeetArgsStruct<WithdrawInstructionArgs>(
+public let auctioneerDepositStruct = FixableBeetArgsStruct<AuctioneerDepositInstructionArgs>(
     fields: [
         ("instructionDiscriminator", Beet.fixedBeet(.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
         ("escrowPaymentBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
         ("amount", Beet.fixedBeet(.init(value: .scalar(u64()))))
     ],
-    description: "WithdrawInstructionArgs"
+    description: "AuctioneerDepositInstructionArgs"
 )
 /**
-* Accounts required by the _withdraw_ instruction
+* Accounts required by the _auctioneerDeposit_ instruction
 *
-* @property [] wallet  
-* @property [_writable_] receiptAccount  
+* @property [**signer**] wallet  
+* @property [_writable_] paymentAccount  
+* @property [] transferAuthority  
 * @property [_writable_] escrowPaymentAccount  
 * @property [] treasuryMint  
 * @property [] authority  
+* @property [**signer**] auctioneerAuthority  
 * @property [] auctionHouse  
-* @property [_writable_] auctionHouseFeeAccount   
+* @property [_writable_] auctionHouseFeeAccount  
+* @property [] ahAuctioneerPda   
 * @category Instructions
-* @category Withdraw
+* @category AuctioneerDeposit
 * @category generated
 */
-public struct WithdrawInstructionAccounts {
+public struct AuctioneerDepositInstructionAccounts {
         let wallet: PublicKey
-        let receiptAccount: PublicKey
+        let paymentAccount: PublicKey
+        let transferAuthority: PublicKey
         let escrowPaymentAccount: PublicKey
         let treasuryMint: PublicKey
         let authority: PublicKey
+        let auctioneerAuthority: PublicKey
         let auctionHouse: PublicKey
         let auctionHouseFeeAccount: PublicKey
+        let ahAuctioneerPda: PublicKey
         let tokenProgram: PublicKey?
         let systemProgram: PublicKey?
-        let ataProgram: PublicKey?
         let rent: PublicKey?
 }
 
-public let withdrawInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 119] as [UInt8]
+public let auctioneerDepositInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 97] as [UInt8]
 
 /**
-* Creates a _Withdraw_ instruction.
+* Creates a _AuctioneerDeposit_ instruction.
 *
 * @param accounts that will be accessed while the instruction is processed
   * @param args to provide as instruction data to the program
  * 
 * @category Instructions
-* @category Withdraw
+* @category AuctioneerDeposit
 * @category generated
 */
-public func createWithdrawInstruction(accounts: WithdrawInstructionAccounts, 
-args: WithdrawInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk")!) -> TransactionInstruction {
+public func createAuctioneerDepositInstruction(accounts: AuctioneerDepositInstructionAccounts, 
+args: AuctioneerDepositInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk")!) -> TransactionInstruction {
 
-    let data = withdrawStruct.serialize(
-            instance: ["instructionDiscriminator": withdrawInstructionDiscriminator,
+    let data = auctioneerDepositStruct.serialize(
+            instance: ["instructionDiscriminator": auctioneerDepositInstructionDiscriminator,
 "escrowPaymentBump": args.escrowPaymentBump,
   "amount": args.amount])
 
     let keys: [Account.Meta] = [
         Account.Meta(
             publicKey: accounts.wallet,
-            isSigner: false,
+            isSigner: true,
             isWritable: false
         ),
         Account.Meta(
-            publicKey: accounts.receiptAccount,
+            publicKey: accounts.paymentAccount,
             isSigner: false,
             isWritable: true
+        ),
+        Account.Meta(
+            publicKey: accounts.transferAuthority,
+            isSigner: false,
+            isWritable: false
         ),
         Account.Meta(
             publicKey: accounts.escrowPaymentAccount,
@@ -106,6 +116,11 @@ args: WithdrawInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13js
             isWritable: false
         ),
         Account.Meta(
+            publicKey: accounts.auctioneerAuthority,
+            isSigner: true,
+            isWritable: false
+        ),
+        Account.Meta(
             publicKey: accounts.auctionHouse,
             isSigner: false,
             isWritable: false
@@ -116,17 +131,17 @@ args: WithdrawInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13js
             isWritable: true
         ),
         Account.Meta(
+            publicKey: accounts.ahAuctioneerPda,
+            isSigner: false,
+            isWritable: false
+        ),
+        Account.Meta(
             publicKey: accounts.tokenProgram ?? PublicKey.tokenProgramId,
             isSigner: false,
             isWritable: false
         ),
         Account.Meta(
             publicKey: accounts.systemProgram ?? PublicKey.systemProgramId,
-            isSigner: false,
-            isWritable: false
-        ),
-        Account.Meta(
-            publicKey: accounts.ataProgram ?? PublicKey.splAssociatedTokenAccountProgramId,
             isSigner: false,
             isWritable: false
         ),

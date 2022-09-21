@@ -6,8 +6,8 @@
  */
 import Foundation
 import Beet
-import Solana
 import BeetSolana
+import Solana
 
 
 /**
@@ -15,21 +15,25 @@ import BeetSolana
 * @category Accounts
 * @category generated
 */
-protocol AuctionhouseArgs {
+public protocol AuctionhouseArgs {
     
-    var auctionHouseFeeAccount: PublicKey { get }
-    var auctionHouseTreasury: PublicKey { get }
-    var treasuryWithdrawalDestination: PublicKey { get }
-    var feeWithdrawalDestination: PublicKey { get }
-    var treasuryMint: PublicKey { get }
-    var authority: PublicKey { get }
-    var creator: PublicKey { get }
-    var bump: UInt8 { get }
-    var treasuryBump: UInt8 { get }
-    var feePayerBump: UInt8 { get }
-    var sellerFeeBasisPoints: UInt16 { get }
-    var requiresSignOff: Bool { get }
-    var canChangeSalePrice: Bool { get }
+     var auctionHouseFeeAccount: PublicKey { get }
+     var auctionHouseTreasury: PublicKey { get }
+     var treasuryWithdrawalDestination: PublicKey { get }
+     var feeWithdrawalDestination: PublicKey { get }
+     var treasuryMint: PublicKey { get }
+     var authority: PublicKey { get }
+     var creator: PublicKey { get }
+     var bump: UInt8 { get }
+     var treasuryBump: UInt8 { get }
+     var feePayerBump: UInt8 { get }
+     var sellerFeeBasisPoints: UInt16 { get }
+     var requiresSignOff: Bool { get }
+     var canChangeSalePrice: Bool { get }
+     var escrowPaymentBump: UInt8 { get }
+     var hasAuctioneer: Bool { get }
+     var auctioneerAddress: PublicKey { get }
+     var scopes: [Bool] /* size: 7 */ { get }
 }
 
 
@@ -41,24 +45,28 @@ protocol AuctionhouseArgs {
  * @category generated
  */
 public struct Auctionhouse: AuctionhouseArgs {
-  let auctionHouseFeeAccount: PublicKey
-  let auctionHouseTreasury: PublicKey
-  let treasuryWithdrawalDestination: PublicKey
-  let feeWithdrawalDestination: PublicKey
-  let treasuryMint: PublicKey
-  let authority: PublicKey
-  let creator: PublicKey
-  let bump: UInt8
-  let treasuryBump: UInt8
-  let feePayerBump: UInt8
-  let sellerFeeBasisPoints: UInt16
-  let requiresSignOff: Bool
-  let canChangeSalePrice: Bool
+  public let auctionHouseFeeAccount: PublicKey
+  public let auctionHouseTreasury: PublicKey
+  public let treasuryWithdrawalDestination: PublicKey
+  public let feeWithdrawalDestination: PublicKey
+  public let treasuryMint: PublicKey
+  public let authority: PublicKey
+  public let creator: PublicKey
+  public let bump: UInt8
+  public let treasuryBump: UInt8
+  public let feePayerBump: UInt8
+  public let sellerFeeBasisPoints: UInt16
+  public let requiresSignOff: Bool
+  public let canChangeSalePrice: Bool
+  public let escrowPaymentBump: UInt8
+  public let hasAuctioneer: Bool
+  public let auctioneerAddress: PublicKey
+  public let scopes: [Bool] /* size: 7 */
 
   /**
    * Creates a {@link Auctionhouse} instance from the provided args.
    */
-  static func fromArgs(args: Args) -> Auctionhouse {
+  public static func fromArgs(args: Args) -> Auctionhouse {
     return Auctionhouse(
         auctionHouseFeeAccount: args["auctionHouseFeeAccount"] as! PublicKey,
         auctionHouseTreasury: args["auctionHouseTreasury"] as! PublicKey,
@@ -72,14 +80,18 @@ public struct Auctionhouse: AuctionhouseArgs {
         feePayerBump: args["feePayerBump"] as! UInt8,
         sellerFeeBasisPoints: args["sellerFeeBasisPoints"] as! UInt16,
         requiresSignOff: args["requiresSignOff"] as! Bool,
-        canChangeSalePrice: args["canChangeSalePrice"] as! Bool
+        canChangeSalePrice: args["canChangeSalePrice"] as! Bool,
+        escrowPaymentBump: args["escrowPaymentBump"] as! UInt8,
+        hasAuctioneer: args["hasAuctioneer"] as! Bool,
+        auctioneerAddress: args["auctioneerAddress"] as! PublicKey,
+        scopes: args["scopes"] as! [Bool] /* size: 7 */
     )
   }
   /**
    * Deserializes the {@link Auctionhouse} from the data of the provided {@link web3.AccountInfo}.
    * @returns a tuple of the account data and the offset up to which the buffer was read to obtain it.
    */
-  static func fromAccountInfo(
+  public static func fromAccountInfo(
     accountInfo: Foundation.Data,
     offset:Int=0
   ) -> ( Auctionhouse, Int )  {
@@ -91,7 +103,7 @@ public struct Auctionhouse: AuctionhouseArgs {
    *
    * @throws Error if no account info is found at the address or if deserialization fails
    */
-  static func fromAccountAddress(
+  public static func fromAccountAddress(
     connection: Api,
     address: PublicKey,
     onComplete: @escaping (Result<Auctionhouse, Error>) -> Void
@@ -113,7 +125,7 @@ public struct Auctionhouse: AuctionhouseArgs {
    * Deserializes the {@link Auctionhouse} from the provided data Buffer.
    * @returns a tuple of the account data and the offset up to which the buffer was read to obtain it.
    */
-  static func deserialize(
+  public static func deserialize(
     buf: Foundation.Data,
     offset: Int = 0
   ) -> ( Auctionhouse, Int ) {
@@ -123,7 +135,7 @@ public struct Auctionhouse: AuctionhouseArgs {
    * Serializes the {@link Auctionhouse} into a Buffer.
    * @returns a tuple of the created Buffer and the offset up to which the buffer was written to store it.
    */
-  func serialize() -> ( Foundation.Data, Int ) {
+  public func serialize() -> ( Foundation.Data, Int ) {
     return auctionHouseBeet.serialize(instance: Auctionhouse(auctionHouseFeeAccount : self.auctionHouseFeeAccount,
         auctionHouseTreasury : self.auctionHouseTreasury,
         treasuryWithdrawalDestination : self.treasuryWithdrawalDestination,
@@ -136,7 +148,11 @@ public struct Auctionhouse: AuctionhouseArgs {
         feePayerBump : self.feePayerBump,
         sellerFeeBasisPoints : self.sellerFeeBasisPoints,
         requiresSignOff : self.requiresSignOff,
-        canChangeSalePrice : self.canChangeSalePrice))
+        canChangeSalePrice : self.canChangeSalePrice,
+        escrowPaymentBump : self.escrowPaymentBump,
+        hasAuctioneer : self.hasAuctioneer,
+        auctioneerAddress : self.auctioneerAddress,
+        scopes : self.scopes))
   }
     /**
   * Returns the byteSize of a {@link Buffer} holding the serialized data of
@@ -185,7 +201,11 @@ public struct Auctionhouse: AuctionhouseArgs {
         ("feePayerBump", (.init(value: .scalar(u8())))),
         ("sellerFeeBasisPoints", (.init(value: .scalar(u16())))),
         ("requiresSignOff", (.init(value: .scalar(bool())))),
-        ("canChangeSalePrice", (.init(value: .scalar(bool()))))
+        ("canChangeSalePrice", (.init(value: .scalar(bool())))),
+        ("escrowPaymentBump", (.init(value: .scalar(u8())))),
+        ("hasAuctioneer", (.init(value: .scalar(bool())))),
+        ("auctioneerAddress", (.init(value: .scalar(BeetPublicKey())))),
+        ("scopes", (.init(value: .collection(UniformFixedSizeArray<Bool>(element: .init(value: .scalar(bool())), len: 7)))))
     ],
     construct: Auctionhouse.fromArgs,
     description: "Auctionhouse"

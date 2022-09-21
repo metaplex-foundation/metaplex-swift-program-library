@@ -204,12 +204,117 @@ public enum auction_houseError: String, Error {
  */
     case instructionMismatchError = "0x178b"
     /**
- * EscrowUnderRentExemption: '0x178c'
+ * InvalidAuctioneer: '0x178c'
  *
  * @category Errors
  * @category generated
  */
-    case escrowUnderRentExemptionError = "0x178c"
+    case invalidAuctioneerError = "0x178c"
+    /**
+ * MissingAuctioneerScope: '0x178d'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case missingAuctioneerScopeError = "0x178d"
+    /**
+ * MustUseAuctioneerHandler: '0x178e'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case mustUseAuctioneerHandlerError = "0x178e"
+    /**
+ * NoAuctioneerProgramSet: '0x178f'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case noAuctioneerProgramSetError = "0x178f"
+    /**
+ * TooManyScopes: '0x1790'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case tooManyScopesError = "0x1790"
+    /**
+ * AuctionHouseNotDelegated: '0x1791'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case auctionHouseNotDelegatedError = "0x1791"
+    /**
+ * BumpSeedNotInHashMap: '0x1792'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case bumpSeedNotInHashMapError = "0x1792"
+    /**
+ * EscrowUnderRentExemption: '0x1793'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case escrowUnderRentExemptionError = "0x1793"
+    /**
+ * InvalidSeedsOrAuctionHouseNotDelegated: '0x1794'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case invalidSeedsOrAuctionHouseNotDelegatedError = "0x1794"
+    /**
+ * BuyerTradeStateNotValid: '0x1795'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case buyerTradeStateNotValidError = "0x1795"
+    /**
+ * MissingElementForPartialOrder: '0x1796'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case missingElementForPartialOrderError = "0x1796"
+    /**
+ * NotEnoughTokensAvailableForPurchase: '0x1797'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case notEnoughTokensAvailableForPurchaseError = "0x1797"
+    /**
+ * PartialPriceMismatch: '0x1798'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case partialPriceMismatchError = "0x1798"
+    /**
+ * AuctionHouseAlreadyDelegated: '0x1799'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case auctionHouseAlreadyDelegatedError = "0x1799"
+    /**
+ * AuctioneerAuthorityMismatch: '0x179a'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case auctioneerAuthorityMismatchError = "0x179a"
+    /**
+ * InsufficientFunds: '0x179b'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case insufficientFundsError = "0x179b"
 
     public var code: String? { self.rawValue }
 }
@@ -414,12 +519,117 @@ extension auction_houseError: LocalizedError {
  */
     case .instructionMismatchError: return "The instruction does not match"
     /**
+ * InvalidAuctioneer: 'Invalid Auctioneer for this Auction House instance.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .invalidAuctioneerError: return "Invalid Auctioneer for this Auction House instance."
+    /**
+ * MissingAuctioneerScope: 'The Auctioneer does not have the correct scope for this action.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .missingAuctioneerScopeError: return "The Auctioneer does not have the correct scope for this action."
+    /**
+ * MustUseAuctioneerHandler: 'Must use auctioneer handler.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .mustUseAuctioneerHandlerError: return "Must use auctioneer handler."
+    /**
+ * NoAuctioneerProgramSet: 'No Auctioneer program set.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .noAuctioneerProgramSetError: return "No Auctioneer program set."
+    /**
+ * TooManyScopes: 'Too many scopes.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .tooManyScopesError: return "Too many scopes."
+    /**
+ * AuctionHouseNotDelegated: 'Auction House not delegated.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .auctionHouseNotDelegatedError: return "Auction House not delegated."
+    /**
+ * BumpSeedNotInHashMap: 'Bump seed not in hash map.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .bumpSeedNotInHashMapError: return "Bump seed not in hash map."
+    /**
  * EscrowUnderRentExemption: 'The instruction would drain the escrow below rent exemption threshold'
  *
  * @category Errors
  * @category generated
  */
     case .escrowUnderRentExemptionError: return "The instruction would drain the escrow below rent exemption threshold"
+    /**
+ * InvalidSeedsOrAuctionHouseNotDelegated: 'Invalid seeds or Auction House not delegated'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .invalidSeedsOrAuctionHouseNotDelegatedError: return "Invalid seeds or Auction House not delegated"
+    /**
+ * BuyerTradeStateNotValid: 'The buyer trade state was unable to be initialized.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .buyerTradeStateNotValidError: return "The buyer trade state was unable to be initialized."
+    /**
+ * MissingElementForPartialOrder: 'Partial order size and price must both be provided in a partial buy.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .missingElementForPartialOrderError: return "Partial order size and price must both be provided in a partial buy."
+    /**
+ * NotEnoughTokensAvailableForPurchase: 'Amount of tokens available for purchase is less than the partial order amount.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .notEnoughTokensAvailableForPurchaseError: return "Amount of tokens available for purchase is less than the partial order amount."
+    /**
+ * PartialPriceMismatch: 'Calculated partial price does not not partial price that was provided.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .partialPriceMismatchError: return "Calculated partial price does not not partial price that was provided."
+    /**
+ * AuctionHouseAlreadyDelegated: 'Auction House already delegated.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .auctionHouseAlreadyDelegatedError: return "Auction House already delegated."
+    /**
+ * AuctioneerAuthorityMismatch: 'Auctioneer Authority Mismatch'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .auctioneerAuthorityMismatchError: return "Auctioneer Authority Mismatch"
+    /**
+ * InsufficientFunds: 'Insufficient funds in escrow account to purchase.'
+ *
+ * @category Errors
+ * @category generated
+ */
+    case .insufficientFundsError: return "Insufficient funds in escrow account to purchase."
         }
     }
 }
