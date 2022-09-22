@@ -5,7 +5,7 @@ import Beet
  * @category generated
  */
 public enum BidType {
-    case PublicSale, PrivateSale
+    case PublicSale, PrivateSale, AuctioneerPublicSale, AuctioneerPrivateSale
 }
 
 extension BidType : CaseIterable & RawRepresentable {
@@ -15,6 +15,8 @@ extension BidType : CaseIterable & RawRepresentable {
         switch rawValue {
         case 0 : self = .PublicSale
         case 1 : self = .PrivateSale
+        case 2 : self = .AuctioneerPublicSale
+        case 3 : self = .AuctioneerPrivateSale
         default : return nil
         }
     }
@@ -23,6 +25,8 @@ extension BidType : CaseIterable & RawRepresentable {
         switch self {
         case .PublicSale : return 0
         case .PrivateSale : return 1
+        case .AuctioneerPublicSale : return 2
+        case .AuctioneerPrivateSale : return 3
         }
     }
 }

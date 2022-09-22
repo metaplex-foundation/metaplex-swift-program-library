@@ -6,8 +6,8 @@
  */
 import Foundation
 import Solana
-import Beet
 import BeetSolana
+import Beet
 
 
 /**
@@ -15,22 +15,21 @@ import BeetSolana
 * @category Accounts
 * @category generated
 */
-protocol ListingreceiptArgs {
-    
-    var tradeState: PublicKey { get }
-    var bookkeeper: PublicKey { get }
-    var auctionHouse: PublicKey { get }
-    var seller: PublicKey { get }
-    var metadata: PublicKey { get }
-    var purchaseReceipt: COption<PublicKey> { get }
-    var price: UInt64 { get }
-    var tokenSize: UInt64 { get }
-    var bump: UInt8 { get }
-    var tradeStateBump: UInt8 { get }
-    var createdAt: Int64 { get }
-    var canceledAt: COption<Int64> { get }
+public protocol ListingreceiptArgs {
+    var listingReceiptDiscriminator: [UInt8] { get }
+     var tradeState: PublicKey { get }
+     var bookkeeper: PublicKey { get }
+     var auctionHouse: PublicKey { get }
+     var seller: PublicKey { get }
+     var metadata: PublicKey { get }
+     var purchaseReceipt: COption<PublicKey> { get }
+     var price: UInt64 { get }
+     var tokenSize: UInt64 { get }
+     var bump: UInt8 { get }
+     var tradeStateBump: UInt8 { get }
+     var createdAt: Int64 { get }
+     var canceledAt: COption<Int64> { get }
 }
-
 
 /**
  * Holds the data for the {@link Listingreceipt} Account and provides de/serialization
@@ -40,24 +39,28 @@ protocol ListingreceiptArgs {
  * @category generated
  */
 public struct Listingreceipt: ListingreceiptArgs {
-  let tradeState: PublicKey
-  let bookkeeper: PublicKey
-  let auctionHouse: PublicKey
-  let seller: PublicKey
-  let metadata: PublicKey
-  let purchaseReceipt: COption<PublicKey>
-  let price: UInt64
-  let tokenSize: UInt64
-  let bump: UInt8
-  let tradeStateBump: UInt8
-  let createdAt: Int64
-  let canceledAt: COption<Int64>
+  public static let listingReceiptDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+
+  public let listingReceiptDiscriminator: [UInt8]
+  public let tradeState: PublicKey
+  public let bookkeeper: PublicKey
+  public let auctionHouse: PublicKey
+  public let seller: PublicKey
+  public let metadata: PublicKey
+  public let purchaseReceipt: COption<PublicKey>
+  public let price: UInt64
+  public let tokenSize: UInt64
+  public let bump: UInt8
+  public let tradeStateBump: UInt8
+  public let createdAt: Int64
+  public let canceledAt: COption<Int64>
 
   /**
    * Creates a {@link Listingreceipt} instance from the provided args.
    */
-  static func fromArgs(args: Args) -> Listingreceipt {
+  public static func fromArgs(args: Args) -> Listingreceipt {
     return Listingreceipt(
+        listingReceiptDiscriminator: args["accountDiscriminator"] as! [UInt8],
         tradeState: args["tradeState"] as! PublicKey,
         bookkeeper: args["bookkeeper"] as! PublicKey,
         auctionHouse: args["auctionHouse"] as! PublicKey,
@@ -76,7 +79,7 @@ public struct Listingreceipt: ListingreceiptArgs {
    * Deserializes the {@link Listingreceipt} from the data of the provided {@link web3.AccountInfo}.
    * @returns a tuple of the account data and the offset up to which the buffer was read to obtain it.
    */
-  static func fromAccountInfo(
+  public static func fromAccountInfo(
     accountInfo: Foundation.Data,
     offset:Int=0
   ) -> ( Listingreceipt, Int )  {
@@ -88,7 +91,7 @@ public struct Listingreceipt: ListingreceiptArgs {
    *
    * @throws Error if no account info is found at the address or if deserialization fails
    */
-  static func fromAccountAddress(
+  public static func fromAccountAddress(
     connection: Api,
     address: PublicKey,
     onComplete: @escaping (Result<Listingreceipt, Error>) -> Void
@@ -110,7 +113,7 @@ public struct Listingreceipt: ListingreceiptArgs {
    * Deserializes the {@link Listingreceipt} from the provided data Buffer.
    * @returns a tuple of the account data and the offset up to which the buffer was read to obtain it.
    */
-  static func deserialize(
+  public static func deserialize(
     buf: Foundation.Data,
     offset: Int = 0
   ) -> ( Listingreceipt, Int ) {
@@ -120,8 +123,9 @@ public struct Listingreceipt: ListingreceiptArgs {
    * Serializes the {@link Listingreceipt} into a Buffer.
    * @returns a tuple of the created Buffer and the offset up to which the buffer was written to store it.
    */
-  func serialize() -> ( Foundation.Data, Int ) {
+  public func serialize() -> ( Foundation.Data, Int ) {
     return listingReceiptBeet.serialize(instance: [
+        "listingReceiptDiscriminator" : self.listingReceiptDiscriminator,
         "tradeState" : self.tradeState,
         "bookkeeper" : self.bookkeeper,
         "auctionHouse" : self.auctionHouse,
@@ -169,7 +173,7 @@ static func getMinimumBalanceForRentExemption(
    */
   public let listingReceiptBeet = FixableBeetStruct<Listingreceipt>(
     fields:[
-        
+        ("accountDiscriminator", Beet.fixedBeet(.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
         ("tradeState", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),
         ("bookkeeper", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),
         ("auctionHouse", Beet.fixedBeet(.init(value: .scalar(BeetPublicKey())))),

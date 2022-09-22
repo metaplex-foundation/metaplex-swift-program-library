@@ -10,87 +10,79 @@ import Beet
 
 /**
  * @category Instructions
- * @category Buy
+ * @category AuctioneerDeposit
  * @category generated
  */
-public struct BuyInstructionArgs{
+public struct AuctioneerDepositInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
-    let tradeStateBump: UInt8
     let escrowPaymentBump: UInt8
-    let buyerPrice: UInt64
-    let tokenSize: UInt64
+    let amount: UInt64
 }
 /**
  * @category Instructions
- * @category Buy
+ * @category AuctioneerDeposit
  * @category generated
  */
-public let buyStruct = FixableBeetArgsStruct<BuyInstructionArgs>(
+public let auctioneerDepositStruct = FixableBeetArgsStruct<AuctioneerDepositInstructionArgs>(
     fields: [
         ("instructionDiscriminator", Beet.fixedBeet(.init(value: .collection(UniformFixedSizeArray<UInt8>(element: .init(value: .scalar(u8())), len: 8))))),
-        ("tradeStateBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
         ("escrowPaymentBump", Beet.fixedBeet(.init(value: .scalar(u8())))),
-        ("buyerPrice", Beet.fixedBeet(.init(value: .scalar(u64())))),
-        ("tokenSize", Beet.fixedBeet(.init(value: .scalar(u64()))))
+        ("amount", Beet.fixedBeet(.init(value: .scalar(u64()))))
     ],
-    description: "BuyInstructionArgs"
+    description: "AuctioneerDepositInstructionArgs"
 )
 /**
-* Accounts required by the _buy_ instruction
+* Accounts required by the _auctioneerDeposit_ instruction
 *
 * @property [**signer**] wallet  
 * @property [_writable_] paymentAccount  
 * @property [] transferAuthority  
-* @property [] treasuryMint  
-* @property [] tokenAccount  
-* @property [] metadata  
 * @property [_writable_] escrowPaymentAccount  
+* @property [] treasuryMint  
 * @property [] authority  
+* @property [**signer**] auctioneerAuthority  
 * @property [] auctionHouse  
 * @property [_writable_] auctionHouseFeeAccount  
-* @property [_writable_] buyerTradeState   
+* @property [] ahAuctioneerPda   
 * @category Instructions
-* @category Buy
+* @category AuctioneerDeposit
 * @category generated
 */
-public struct BuyInstructionAccounts {
+public struct AuctioneerDepositInstructionAccounts {
         let wallet: PublicKey
         let paymentAccount: PublicKey
         let transferAuthority: PublicKey
-        let treasuryMint: PublicKey
-        let tokenAccount: PublicKey
-        let metadata: PublicKey
         let escrowPaymentAccount: PublicKey
+        let treasuryMint: PublicKey
         let authority: PublicKey
+        let auctioneerAuthority: PublicKey
         let auctionHouse: PublicKey
         let auctionHouseFeeAccount: PublicKey
-        let buyerTradeState: PublicKey
+        let ahAuctioneerPda: PublicKey
         let tokenProgram: PublicKey?
         let systemProgram: PublicKey?
         let rent: PublicKey?
 }
 
-public let buyInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 98] as [UInt8]
+public let auctioneerDepositInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 97] as [UInt8]
 
 /**
-* Creates a _Buy_ instruction.
+* Creates a _AuctioneerDeposit_ instruction.
 *
 * @param accounts that will be accessed while the instruction is processed
   * @param args to provide as instruction data to the program
  * 
 * @category Instructions
-* @category Buy
+* @category AuctioneerDeposit
 * @category generated
 */
-public func createBuyInstruction(accounts: BuyInstructionAccounts, 
-args: BuyInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk")!) -> TransactionInstruction {
+public func createAuctioneerDepositInstruction(accounts: AuctioneerDepositInstructionAccounts, 
+args: AuctioneerDepositInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk")!) -> TransactionInstruction {
 
-    let data = buyStruct.serialize(
-            instance: ["instructionDiscriminator": buyInstructionDiscriminator,
-"tradeStateBump": args.tradeStateBump,
-  "escrowPaymentBump": args.escrowPaymentBump,
-  "buyerPrice": args.buyerPrice,
-  "tokenSize": args.tokenSize])
+    let data = auctioneerDepositStruct.serialize(
+            instance: ["instructionDiscriminator": auctioneerDepositInstructionDiscriminator,
+"escrowPaymentBump": args.escrowPaymentBump,
+  "amount": args.amount])
 
     let keys: [Account.Meta] = [
         Account.Meta(
@@ -109,28 +101,23 @@ args: BuyInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwW
             isWritable: false
         ),
         Account.Meta(
-            publicKey: accounts.treasuryMint,
-            isSigner: false,
-            isWritable: false
-        ),
-        Account.Meta(
-            publicKey: accounts.tokenAccount,
-            isSigner: false,
-            isWritable: false
-        ),
-        Account.Meta(
-            publicKey: accounts.metadata,
-            isSigner: false,
-            isWritable: false
-        ),
-        Account.Meta(
             publicKey: accounts.escrowPaymentAccount,
             isSigner: false,
             isWritable: true
         ),
         Account.Meta(
+            publicKey: accounts.treasuryMint,
+            isSigner: false,
+            isWritable: false
+        ),
+        Account.Meta(
             publicKey: accounts.authority,
             isSigner: false,
+            isWritable: false
+        ),
+        Account.Meta(
+            publicKey: accounts.auctioneerAuthority,
+            isSigner: true,
             isWritable: false
         ),
         Account.Meta(
@@ -144,9 +131,9 @@ args: BuyInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsjafwW
             isWritable: true
         ),
         Account.Meta(
-            publicKey: accounts.buyerTradeState,
+            publicKey: accounts.ahAuctioneerPda,
             isSigner: false,
-            isWritable: true
+            isWritable: false
         ),
         Account.Meta(
             publicKey: accounts.tokenProgram ?? PublicKey.tokenProgramId,
