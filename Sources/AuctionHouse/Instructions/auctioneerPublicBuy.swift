@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -96,83 +96,83 @@ args: AuctioneerPublicBuyInstructionArgs, programId: PublicKey=PublicKey(string:
   "buyerPrice": args.buyerPrice,
   "tokenSize": args.tokenSize])
 
-    let keys: [Account.Meta] = [
-        Account.Meta(
+    let keys: [AccountMeta] = [
+        AccountMeta(
             publicKey: accounts.wallet,
             isSigner: true,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.paymentAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.transferAuthority,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.treasuryMint,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenAccount,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.metadata,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.escrowPaymentAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.authority,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctioneerAuthority,
             isSigner: true,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouse,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouseFeeAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.buyerTradeState,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.ahAuctioneerPda,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenProgram ?? PublicKey.tokenProgramId,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.systemProgram ?? PublicKey.systemProgramId,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.rent ?? PublicKey.sysvarRent,
             isSigner: false,
             isWritable: false

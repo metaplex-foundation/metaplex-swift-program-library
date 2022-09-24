@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Solana
 import Beet
+import Solana
 
 /**
  * @category Instructions
@@ -80,53 +80,53 @@ args: AuctioneerCancelInstructionArgs, programId: PublicKey=PublicKey(string: "h
 "buyerPrice": args.buyerPrice,
   "tokenSize": args.tokenSize])
 
-    let keys: [Account.Meta] = [
-        Account.Meta(
+    let keys: [AccountMeta] = [
+        AccountMeta(
             publicKey: accounts.wallet,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenMint,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.authority,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctioneerAuthority,
             isSigner: true,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouse,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouseFeeAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tradeState,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.ahAuctioneerPda,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenProgram ?? PublicKey.tokenProgramId,
             isSigner: false,
             isWritable: false

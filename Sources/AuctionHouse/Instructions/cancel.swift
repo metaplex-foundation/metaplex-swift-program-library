@@ -76,43 +76,43 @@ args: CancelInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsja
 "buyerPrice": args.buyerPrice,
   "tokenSize": args.tokenSize])
 
-    let keys: [Account.Meta] = [
-        Account.Meta(
+    let keys: [AccountMeta] = [
+        AccountMeta(
             publicKey: accounts.wallet,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenMint,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.authority,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouse,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouseFeeAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tradeState,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenProgram ?? PublicKey.tokenProgramId,
             isSigner: false,
             isWritable: false

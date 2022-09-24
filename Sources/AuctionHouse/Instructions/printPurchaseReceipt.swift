@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Solana
 import Beet
+import Solana
 
 /**
  * @category Instructions
@@ -70,38 +70,38 @@ args: PrintPurchaseReceiptInstructionArgs, programId: PublicKey=PublicKey(string
             instance: ["instructionDiscriminator": printPurchaseReceiptInstructionDiscriminator,
 "purchaseReceiptBump": args.purchaseReceiptBump])
 
-    let keys: [Account.Meta] = [
-        Account.Meta(
+    let keys: [AccountMeta] = [
+        AccountMeta(
             publicKey: accounts.purchaseReceipt,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.listingReceipt,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.bidReceipt,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.bookkeeper,
             isSigner: true,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.systemProgram ?? PublicKey.systemProgramId,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.rent ?? PublicKey.sysvarRent,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.instruction,
             isSigner: false,
             isWritable: false

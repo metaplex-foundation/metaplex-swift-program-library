@@ -80,58 +80,58 @@ args: DepositInstructionArgs, programId: PublicKey=PublicKey(string: "hausS13jsj
 "escrowPaymentBump": args.escrowPaymentBump,
   "amount": args.amount])
 
-    let keys: [Account.Meta] = [
-        Account.Meta(
+    let keys: [AccountMeta] = [
+        AccountMeta(
             publicKey: accounts.wallet,
             isSigner: true,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.paymentAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.transferAuthority,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.escrowPaymentAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.treasuryMint,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.authority,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouse,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouseFeeAccount,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenProgram ?? PublicKey.tokenProgramId,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.systemProgram ?? PublicKey.systemProgramId,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.rent ?? PublicKey.sysvarRent,
             isSigner: false,
             isWritable: false

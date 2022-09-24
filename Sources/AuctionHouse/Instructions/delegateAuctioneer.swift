@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -67,28 +67,28 @@ args: DelegateAuctioneerInstructionArgs, programId: PublicKey=PublicKey(string: 
             instance: ["instructionDiscriminator": delegateAuctioneerInstructionDiscriminator,
 "scopes": args.scopes])
 
-    let keys: [Account.Meta] = [
-        Account.Meta(
+    let keys: [AccountMeta] = [
+        AccountMeta(
             publicKey: accounts.auctionHouse,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.authority,
             isSigner: true,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctioneerAuthority,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.ahAuctioneerPda,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.systemProgram ?? PublicKey.systemProgramId,
             isSigner: false,
             isWritable: false

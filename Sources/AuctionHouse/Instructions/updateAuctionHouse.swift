@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -84,63 +84,63 @@ args: UpdateAuctionHouseInstructionArgs, programId: PublicKey=PublicKey(string: 
   "requiresSignOff": args.requiresSignOff,
   "canChangeSalePrice": args.canChangeSalePrice])
 
-    let keys: [Account.Meta] = [
-        Account.Meta(
+    let keys: [AccountMeta] = [
+        AccountMeta(
             publicKey: accounts.treasuryMint,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.payer,
             isSigner: true,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.authority,
             isSigner: true,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.newAuthority,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.feeWithdrawalDestination,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.treasuryWithdrawalDestination,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.treasuryWithdrawalDestinationOwner,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.auctionHouse,
             isSigner: false,
             isWritable: true
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.tokenProgram ?? PublicKey.tokenProgramId,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.systemProgram ?? PublicKey.systemProgramId,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.ataProgram ?? PublicKey.splAssociatedTokenAccountProgramId,
             isSigner: false,
             isWritable: false
         ),
-        Account.Meta(
+        AccountMeta(
             publicKey: accounts.rent ?? PublicKey.sysvarRent,
             isSigner: false,
             isWritable: false
