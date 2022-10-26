@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -16,6 +16,14 @@ import Solana
 public struct PrintListingReceiptInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let receiptBump: UInt8
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = printListingReceiptInstructionDiscriminator,
+        receiptBump: UInt8
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.receiptBump = receiptBump
+    }
 }
 /**
  * @category Instructions
@@ -40,14 +48,28 @@ public let printListingReceiptStruct = FixableBeetArgsStruct<PrintListingReceipt
 * @category generated
 */
 public struct PrintListingReceiptInstructionAccounts {
-        let receipt: PublicKey
-        let bookkeeper: PublicKey
-        let systemProgram: PublicKey?
-        let rent: PublicKey?
-        let instruction: PublicKey
+    let receipt: PublicKey
+    let bookkeeper: PublicKey
+    let systemProgram: PublicKey?
+    let rent: PublicKey?
+    let instruction: PublicKey
+
+    public init(
+        receipt: PublicKey,
+        bookkeeper: PublicKey,
+        systemProgram: PublicKey? = nil,
+        rent: PublicKey? = nil,
+        instruction: PublicKey
+    ) {
+        self.receipt = receipt
+        self.bookkeeper = bookkeeper
+        self.systemProgram = systemProgram
+        self.rent = rent
+        self.instruction = instruction
+    }
 }
 
-public let printListingReceiptInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 112] as [UInt8]
+public let printListingReceiptInstructionDiscriminator = [207, 107, 44, 160, 75, 222, 195, 27] as [UInt8]
 
 /**
 * Creates a _PrintListingReceipt_ instruction.

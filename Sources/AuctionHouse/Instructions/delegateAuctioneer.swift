@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Solana
 import Beet
+import Solana
 
 /**
  * @category Instructions
@@ -16,6 +16,14 @@ import Beet
 public struct DelegateAuctioneerInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let scopes: [AuthorityScope]
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = delegateAuctioneerInstructionDiscriminator,
+        scopes: [AuthorityScope]
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.scopes = scopes
+    }
 }
 /**
  * @category Instructions
@@ -41,14 +49,28 @@ public let delegateAuctioneerStruct = FixableBeetArgsStruct<DelegateAuctioneerIn
 * @category generated
 */
 public struct DelegateAuctioneerInstructionAccounts {
-        let auctionHouse: PublicKey
-        let authority: PublicKey
-        let auctioneerAuthority: PublicKey
-        let ahAuctioneerPda: PublicKey
-        let systemProgram: PublicKey?
+    let auctionHouse: PublicKey
+    let authority: PublicKey
+    let auctioneerAuthority: PublicKey
+    let ahAuctioneerPda: PublicKey
+    let systemProgram: PublicKey?
+
+    public init(
+        auctionHouse: PublicKey,
+        authority: PublicKey,
+        auctioneerAuthority: PublicKey,
+        ahAuctioneerPda: PublicKey,
+        systemProgram: PublicKey? = nil
+    ) {
+        self.auctionHouse = auctionHouse
+        self.authority = authority
+        self.auctioneerAuthority = auctioneerAuthority
+        self.ahAuctioneerPda = ahAuctioneerPda
+        self.systemProgram = systemProgram
+    }
 }
 
-public let delegateAuctioneerInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 100] as [UInt8]
+public let delegateAuctioneerInstructionDiscriminator = [106, 178, 12, 122, 74, 173, 251, 222] as [UInt8]
 
 /**
 * Creates a _DelegateAuctioneer_ instruction.

@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -16,6 +16,14 @@ import Solana
 public struct PrintPurchaseReceiptInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let purchaseReceiptBump: UInt8
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = printPurchaseReceiptInstructionDiscriminator,
+        purchaseReceiptBump: UInt8
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.purchaseReceiptBump = purchaseReceiptBump
+    }
 }
 /**
  * @category Instructions
@@ -42,16 +50,34 @@ public let printPurchaseReceiptStruct = FixableBeetArgsStruct<PrintPurchaseRecei
 * @category generated
 */
 public struct PrintPurchaseReceiptInstructionAccounts {
-        let purchaseReceipt: PublicKey
-        let listingReceipt: PublicKey
-        let bidReceipt: PublicKey
-        let bookkeeper: PublicKey
-        let systemProgram: PublicKey?
-        let rent: PublicKey?
-        let instruction: PublicKey
+    let purchaseReceipt: PublicKey
+    let listingReceipt: PublicKey
+    let bidReceipt: PublicKey
+    let bookkeeper: PublicKey
+    let systemProgram: PublicKey?
+    let rent: PublicKey?
+    let instruction: PublicKey
+
+    public init(
+        purchaseReceipt: PublicKey,
+        listingReceipt: PublicKey,
+        bidReceipt: PublicKey,
+        bookkeeper: PublicKey,
+        systemProgram: PublicKey? = nil,
+        rent: PublicKey? = nil,
+        instruction: PublicKey
+    ) {
+        self.purchaseReceipt = purchaseReceipt
+        self.listingReceipt = listingReceipt
+        self.bidReceipt = bidReceipt
+        self.bookkeeper = bookkeeper
+        self.systemProgram = systemProgram
+        self.rent = rent
+        self.instruction = instruction
+    }
 }
 
-public let printPurchaseReceiptInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 112] as [UInt8]
+public let printPurchaseReceiptInstructionDiscriminator = [227, 154, 251, 7, 180, 56, 100, 143] as [UInt8]
 
 /**
 * Creates a _PrintPurchaseReceipt_ instruction.

@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -17,6 +17,16 @@ public struct DepositInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let escrowPaymentBump: UInt8
     let amount: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = depositInstructionDiscriminator,
+        escrowPaymentBump: UInt8,
+        amount: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.escrowPaymentBump = escrowPaymentBump
+        self.amount = amount
+    }
 }
 /**
  * @category Instructions
@@ -47,20 +57,46 @@ public let depositStruct = FixableBeetArgsStruct<DepositInstructionArgs>(
 * @category generated
 */
 public struct DepositInstructionAccounts {
-        let wallet: PublicKey
-        let paymentAccount: PublicKey
-        let transferAuthority: PublicKey
-        let escrowPaymentAccount: PublicKey
-        let treasuryMint: PublicKey
-        let authority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
-        let rent: PublicKey?
+    let wallet: PublicKey
+    let paymentAccount: PublicKey
+    let transferAuthority: PublicKey
+    let escrowPaymentAccount: PublicKey
+    let treasuryMint: PublicKey
+    let authority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+    let rent: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        paymentAccount: PublicKey,
+        transferAuthority: PublicKey,
+        escrowPaymentAccount: PublicKey,
+        treasuryMint: PublicKey,
+        authority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil,
+        rent: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.paymentAccount = paymentAccount
+        self.transferAuthority = transferAuthority
+        self.escrowPaymentAccount = escrowPaymentAccount
+        self.treasuryMint = treasuryMint
+        self.authority = authority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+        self.rent = rent
+    }
 }
 
-public let depositInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 100] as [UInt8]
+public let depositInstructionDiscriminator = [242, 35, 198, 137, 82, 225, 242, 182] as [UInt8]
 
 /**
 * Creates a _Deposit_ instruction.

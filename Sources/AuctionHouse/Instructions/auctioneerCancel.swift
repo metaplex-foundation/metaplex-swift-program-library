@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -17,6 +17,16 @@ public struct AuctioneerCancelInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let buyerPrice: UInt64
     let tokenSize: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = auctioneerCancelInstructionDiscriminator,
+        buyerPrice: UInt64,
+        tokenSize: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.buyerPrice = buyerPrice
+        self.tokenSize = tokenSize
+    }
 }
 /**
  * @category Instructions
@@ -48,19 +58,43 @@ public let auctioneerCancelStruct = FixableBeetArgsStruct<AuctioneerCancelInstru
 * @category generated
 */
 public struct AuctioneerCancelInstructionAccounts {
-        let wallet: PublicKey
-        let tokenAccount: PublicKey
-        let tokenMint: PublicKey
-        let authority: PublicKey
-        let auctioneerAuthority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let tradeState: PublicKey
-        let ahAuctioneerPda: PublicKey
-        let tokenProgram: PublicKey?
+    let wallet: PublicKey
+    let tokenAccount: PublicKey
+    let tokenMint: PublicKey
+    let authority: PublicKey
+    let auctioneerAuthority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let tradeState: PublicKey
+    let ahAuctioneerPda: PublicKey
+    let tokenProgram: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        tokenAccount: PublicKey,
+        tokenMint: PublicKey,
+        authority: PublicKey,
+        auctioneerAuthority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        tradeState: PublicKey,
+        ahAuctioneerPda: PublicKey,
+        tokenProgram: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.tokenAccount = tokenAccount
+        self.tokenMint = tokenMint
+        self.authority = authority
+        self.auctioneerAuthority = auctioneerAuthority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.tradeState = tradeState
+        self.ahAuctioneerPda = ahAuctioneerPda
+        self.tokenProgram = tokenProgram
+    }
 }
 
-public let auctioneerCancelInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 97] as [UInt8]
+public let auctioneerCancelInstructionDiscriminator = [197, 97, 152, 196, 115, 204, 64, 215] as [UInt8]
 
 /**
 * Creates a _AuctioneerCancel_ instruction.

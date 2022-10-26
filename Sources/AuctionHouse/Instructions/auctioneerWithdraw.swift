@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -17,6 +17,16 @@ public struct AuctioneerWithdrawInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let escrowPaymentBump: UInt8
     let amount: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = auctioneerWithdrawInstructionDiscriminator,
+        escrowPaymentBump: UInt8,
+        amount: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.escrowPaymentBump = escrowPaymentBump
+        self.amount = amount
+    }
 }
 /**
  * @category Instructions
@@ -48,22 +58,52 @@ public let auctioneerWithdrawStruct = FixableBeetArgsStruct<AuctioneerWithdrawIn
 * @category generated
 */
 public struct AuctioneerWithdrawInstructionAccounts {
-        let wallet: PublicKey
-        let receiptAccount: PublicKey
-        let escrowPaymentAccount: PublicKey
-        let treasuryMint: PublicKey
-        let authority: PublicKey
-        let auctioneerAuthority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let ahAuctioneerPda: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
-        let ataProgram: PublicKey?
-        let rent: PublicKey?
+    let wallet: PublicKey
+    let receiptAccount: PublicKey
+    let escrowPaymentAccount: PublicKey
+    let treasuryMint: PublicKey
+    let authority: PublicKey
+    let auctioneerAuthority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let ahAuctioneerPda: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+    let ataProgram: PublicKey?
+    let rent: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        receiptAccount: PublicKey,
+        escrowPaymentAccount: PublicKey,
+        treasuryMint: PublicKey,
+        authority: PublicKey,
+        auctioneerAuthority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        ahAuctioneerPda: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil,
+        ataProgram: PublicKey? = nil,
+        rent: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.receiptAccount = receiptAccount
+        self.escrowPaymentAccount = escrowPaymentAccount
+        self.treasuryMint = treasuryMint
+        self.authority = authority
+        self.auctioneerAuthority = auctioneerAuthority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.ahAuctioneerPda = ahAuctioneerPda
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+        self.ataProgram = ataProgram
+        self.rent = rent
+    }
 }
 
-public let auctioneerWithdrawInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 97] as [UInt8]
+public let auctioneerWithdrawInstructionDiscriminator = [85, 166, 219, 110, 168, 143, 180, 236] as [UInt8]
 
 /**
 * Creates a _AuctioneerWithdraw_ instruction.

@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/metaplex-foundation/beet-swift",
       "state" : {
-        "branch" : "1.0.0",
-        "revision" : "0873ff2e674e64e1c40fceeb6c040064015bdc09"
+        "branch" : "1.0.2",
+        "revision" : "05657fa3511b8b72ea8da77745373215445c9885"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/metaplex-foundation/Solana.Swift.git",
       "state" : {
-        "branch" : "2.0.0",
-        "revision" : "2e39f78bb7fa25967bbd51dcac24a3c5510f675a"
+        "branch" : "2.0.1",
+        "revision" : "ec39cf85ee103c78fa46451c21c4bb341aac87bc"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/metaplex-foundation/solita-swift.git",
       "state" : {
-        "branch" : "1.0.1",
-        "revision" : "9c75ad06afd0e2823ac5d969df7e74e52a022442"
+        "branch" : "1.0.2",
+        "revision" : "dd53514e096696ff84c496e4e14d5253b36ef41c"
       }
     },
     {

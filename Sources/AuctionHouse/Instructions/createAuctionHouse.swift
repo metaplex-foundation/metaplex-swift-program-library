@@ -21,6 +21,24 @@ public struct CreateAuctionHouseInstructionArgs{
     let sellerFeeBasisPoints: UInt16
     let requiresSignOff: Bool
     let canChangeSalePrice: Bool
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = createAuctionHouseInstructionDiscriminator,
+        bump: UInt8,
+        feePayerBump: UInt8,
+        treasuryBump: UInt8,
+        sellerFeeBasisPoints: UInt16,
+        requiresSignOff: Bool,
+        canChangeSalePrice: Bool
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.bump = bump
+        self.feePayerBump = feePayerBump
+        self.treasuryBump = treasuryBump
+        self.sellerFeeBasisPoints = sellerFeeBasisPoints
+        self.requiresSignOff = requiresSignOff
+        self.canChangeSalePrice = canChangeSalePrice
+    }
 }
 /**
  * @category Instructions
@@ -56,22 +74,52 @@ public let createAuctionHouseStruct = FixableBeetArgsStruct<CreateAuctionHouseIn
 * @category generated
 */
 public struct CreateAuctionHouseInstructionAccounts {
-        let treasuryMint: PublicKey
-        let payer: PublicKey
-        let authority: PublicKey
-        let feeWithdrawalDestination: PublicKey
-        let treasuryWithdrawalDestination: PublicKey
-        let treasuryWithdrawalDestinationOwner: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let auctionHouseTreasury: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
-        let ataProgram: PublicKey?
-        let rent: PublicKey?
+    let treasuryMint: PublicKey
+    let payer: PublicKey
+    let authority: PublicKey
+    let feeWithdrawalDestination: PublicKey
+    let treasuryWithdrawalDestination: PublicKey
+    let treasuryWithdrawalDestinationOwner: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let auctionHouseTreasury: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+    let ataProgram: PublicKey?
+    let rent: PublicKey?
+
+    public init(
+        treasuryMint: PublicKey,
+        payer: PublicKey,
+        authority: PublicKey,
+        feeWithdrawalDestination: PublicKey,
+        treasuryWithdrawalDestination: PublicKey,
+        treasuryWithdrawalDestinationOwner: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        auctionHouseTreasury: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil,
+        ataProgram: PublicKey? = nil,
+        rent: PublicKey? = nil
+    ) {
+        self.treasuryMint = treasuryMint
+        self.payer = payer
+        self.authority = authority
+        self.feeWithdrawalDestination = feeWithdrawalDestination
+        self.treasuryWithdrawalDestination = treasuryWithdrawalDestination
+        self.treasuryWithdrawalDestinationOwner = treasuryWithdrawalDestinationOwner
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.auctionHouseTreasury = auctionHouseTreasury
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+        self.ataProgram = ataProgram
+        self.rent = rent
+    }
 }
 
-public let createAuctionHouseInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 99] as [UInt8]
+public let createAuctionHouseInstructionDiscriminator = [221, 66, 242, 159, 249, 206, 134, 241] as [UInt8]
 
 /**
 * Creates a _CreateAuctionHouse_ instruction.
