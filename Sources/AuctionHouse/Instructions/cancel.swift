@@ -17,6 +17,16 @@ public struct CancelInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let buyerPrice: UInt64
     let tokenSize: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = cancelInstructionDiscriminator,
+        buyerPrice: UInt64,
+        tokenSize: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.buyerPrice = buyerPrice
+        self.tokenSize = tokenSize
+    }
 }
 /**
  * @category Instructions
@@ -46,17 +56,37 @@ public let cancelStruct = FixableBeetArgsStruct<CancelInstructionArgs>(
 * @category generated
 */
 public struct CancelInstructionAccounts {
-        let wallet: PublicKey
-        let tokenAccount: PublicKey
-        let tokenMint: PublicKey
-        let authority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let tradeState: PublicKey
-        let tokenProgram: PublicKey?
+    let wallet: PublicKey
+    let tokenAccount: PublicKey
+    let tokenMint: PublicKey
+    let authority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let tradeState: PublicKey
+    let tokenProgram: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        tokenAccount: PublicKey,
+        tokenMint: PublicKey,
+        authority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        tradeState: PublicKey,
+        tokenProgram: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.tokenAccount = tokenAccount
+        self.tokenMint = tokenMint
+        self.authority = authority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.tradeState = tradeState
+        self.tokenProgram = tokenProgram
+    }
 }
 
-public let cancelInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 99] as [UInt8]
+public let cancelInstructionDiscriminator = [232, 219, 223, 41, 219, 236, 220, 190] as [UInt8]
 
 /**
 * Creates a _Cancel_ instruction.

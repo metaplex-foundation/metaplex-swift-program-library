@@ -17,6 +17,16 @@ public struct WithdrawInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let escrowPaymentBump: UInt8
     let amount: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = withdrawInstructionDiscriminator,
+        escrowPaymentBump: UInt8,
+        amount: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.escrowPaymentBump = escrowPaymentBump
+        self.amount = amount
+    }
 }
 /**
  * @category Instructions
@@ -46,20 +56,46 @@ public let withdrawStruct = FixableBeetArgsStruct<WithdrawInstructionArgs>(
 * @category generated
 */
 public struct WithdrawInstructionAccounts {
-        let wallet: PublicKey
-        let receiptAccount: PublicKey
-        let escrowPaymentAccount: PublicKey
-        let treasuryMint: PublicKey
-        let authority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
-        let ataProgram: PublicKey?
-        let rent: PublicKey?
+    let wallet: PublicKey
+    let receiptAccount: PublicKey
+    let escrowPaymentAccount: PublicKey
+    let treasuryMint: PublicKey
+    let authority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+    let ataProgram: PublicKey?
+    let rent: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        receiptAccount: PublicKey,
+        escrowPaymentAccount: PublicKey,
+        treasuryMint: PublicKey,
+        authority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil,
+        ataProgram: PublicKey? = nil,
+        rent: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.receiptAccount = receiptAccount
+        self.escrowPaymentAccount = escrowPaymentAccount
+        self.treasuryMint = treasuryMint
+        self.authority = authority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+        self.ataProgram = ataProgram
+        self.rent = rent
+    }
 }
 
-public let withdrawInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 119] as [UInt8]
+public let withdrawInstructionDiscriminator = [183, 18, 70, 156, 148, 109, 161, 34] as [UInt8]
 
 /**
 * Creates a _Withdraw_ instruction.

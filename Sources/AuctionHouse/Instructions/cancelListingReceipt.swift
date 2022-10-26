@@ -16,6 +16,12 @@ import Beet
 public struct CancelListingReceiptInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = cancelListingReceiptInstructionDiscriminator
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+    }
 }
 /**
  * @category Instructions
@@ -39,12 +45,22 @@ public let cancelListingReceiptStruct = FixableBeetArgsStruct<CancelListingRecei
 * @category generated
 */
 public struct CancelListingReceiptInstructionAccounts {
-        let receipt: PublicKey
-        let systemProgram: PublicKey?
-        let instruction: PublicKey
+    let receipt: PublicKey
+    let systemProgram: PublicKey?
+    let instruction: PublicKey
+
+    public init(
+        receipt: PublicKey,
+        systemProgram: PublicKey? = nil,
+        instruction: PublicKey
+    ) {
+        self.receipt = receipt
+        self.systemProgram = systemProgram
+        self.instruction = instruction
+    }
 }
 
-public let cancelListingReceiptInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 99] as [UInt8]
+public let cancelListingReceiptInstructionDiscriminator = [171, 59, 138, 126, 246, 189, 91, 11] as [UInt8]
 
 /**
 * Creates a _CancelListingReceipt_ instruction.

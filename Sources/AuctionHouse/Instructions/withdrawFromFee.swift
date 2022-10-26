@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Solana
 import Beet
+import Solana
 
 /**
  * @category Instructions
@@ -16,6 +16,14 @@ import Beet
 public struct WithdrawFromFeeInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let amount: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = withdrawFromFeeInstructionDiscriminator,
+        amount: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.amount = amount
+    }
 }
 /**
  * @category Instructions
@@ -41,14 +49,28 @@ public let withdrawFromFeeStruct = FixableBeetArgsStruct<WithdrawFromFeeInstruct
 * @category generated
 */
 public struct WithdrawFromFeeInstructionAccounts {
-        let authority: PublicKey
-        let feeWithdrawalDestination: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let auctionHouse: PublicKey
-        let systemProgram: PublicKey?
+    let authority: PublicKey
+    let feeWithdrawalDestination: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let auctionHouse: PublicKey
+    let systemProgram: PublicKey?
+
+    public init(
+        authority: PublicKey,
+        feeWithdrawalDestination: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        auctionHouse: PublicKey,
+        systemProgram: PublicKey? = nil
+    ) {
+        self.authority = authority
+        self.feeWithdrawalDestination = feeWithdrawalDestination
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.auctionHouse = auctionHouse
+        self.systemProgram = systemProgram
+    }
 }
 
-public let withdrawFromFeeInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 119] as [UInt8]
+public let withdrawFromFeeInstructionDiscriminator = [179, 208, 190, 154, 32, 179, 19, 59] as [UInt8]
 
 /**
 * Creates a _WithdrawFromFee_ instruction.

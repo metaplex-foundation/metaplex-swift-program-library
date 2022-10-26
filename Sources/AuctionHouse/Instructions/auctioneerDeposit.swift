@@ -17,6 +17,16 @@ public struct AuctioneerDepositInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let escrowPaymentBump: UInt8
     let amount: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = auctioneerDepositInstructionDiscriminator,
+        escrowPaymentBump: UInt8,
+        amount: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.escrowPaymentBump = escrowPaymentBump
+        self.amount = amount
+    }
 }
 /**
  * @category Instructions
@@ -49,22 +59,52 @@ public let auctioneerDepositStruct = FixableBeetArgsStruct<AuctioneerDepositInst
 * @category generated
 */
 public struct AuctioneerDepositInstructionAccounts {
-        let wallet: PublicKey
-        let paymentAccount: PublicKey
-        let transferAuthority: PublicKey
-        let escrowPaymentAccount: PublicKey
-        let treasuryMint: PublicKey
-        let authority: PublicKey
-        let auctioneerAuthority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let ahAuctioneerPda: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
-        let rent: PublicKey?
+    let wallet: PublicKey
+    let paymentAccount: PublicKey
+    let transferAuthority: PublicKey
+    let escrowPaymentAccount: PublicKey
+    let treasuryMint: PublicKey
+    let authority: PublicKey
+    let auctioneerAuthority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let ahAuctioneerPda: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+    let rent: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        paymentAccount: PublicKey,
+        transferAuthority: PublicKey,
+        escrowPaymentAccount: PublicKey,
+        treasuryMint: PublicKey,
+        authority: PublicKey,
+        auctioneerAuthority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        ahAuctioneerPda: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil,
+        rent: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.paymentAccount = paymentAccount
+        self.transferAuthority = transferAuthority
+        self.escrowPaymentAccount = escrowPaymentAccount
+        self.treasuryMint = treasuryMint
+        self.authority = authority
+        self.auctioneerAuthority = auctioneerAuthority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.ahAuctioneerPda = ahAuctioneerPda
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+        self.rent = rent
+    }
 }
 
-public let auctioneerDepositInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 97] as [UInt8]
+public let auctioneerDepositInstructionDiscriminator = [79, 122, 37, 162, 120, 173, 57, 127] as [UInt8]
 
 /**
 * Creates a _AuctioneerDeposit_ instruction.

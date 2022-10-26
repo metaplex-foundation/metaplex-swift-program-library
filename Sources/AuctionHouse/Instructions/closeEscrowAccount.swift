@@ -16,6 +16,14 @@ import Solana
 public struct CloseEscrowAccountInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let escrowPaymentBump: UInt8
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = closeEscrowAccountInstructionDiscriminator,
+        escrowPaymentBump: UInt8
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.escrowPaymentBump = escrowPaymentBump
+    }
 }
 /**
  * @category Instructions
@@ -40,13 +48,25 @@ public let closeEscrowAccountStruct = FixableBeetArgsStruct<CloseEscrowAccountIn
 * @category generated
 */
 public struct CloseEscrowAccountInstructionAccounts {
-        let wallet: PublicKey
-        let escrowPaymentAccount: PublicKey
-        let auctionHouse: PublicKey
-        let systemProgram: PublicKey?
+    let wallet: PublicKey
+    let escrowPaymentAccount: PublicKey
+    let auctionHouse: PublicKey
+    let systemProgram: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        escrowPaymentAccount: PublicKey,
+        auctionHouse: PublicKey,
+        systemProgram: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.escrowPaymentAccount = escrowPaymentAccount
+        self.auctionHouse = auctionHouse
+        self.systemProgram = systemProgram
+    }
 }
 
-public let closeEscrowAccountInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 99] as [UInt8]
+public let closeEscrowAccountInstructionDiscriminator = [209, 42, 208, 179, 140, 78, 18, 43] as [UInt8]
 
 /**
 * Creates a _CloseEscrowAccount_ instruction.

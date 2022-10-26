@@ -22,6 +22,26 @@ public struct ExecutePartialSaleInstructionArgs{
     let tokenSize: UInt64
     let partialOrderSize: COption<UInt64>
     let partialOrderPrice: COption<UInt64>
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = executePartialSaleInstructionDiscriminator,
+        escrowPaymentBump: UInt8,
+        freeTradeStateBump: UInt8,
+        programAsSignerBump: UInt8,
+        buyerPrice: UInt64,
+        tokenSize: UInt64,
+        partialOrderSize: COption<UInt64>,
+        partialOrderPrice: COption<UInt64>
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.escrowPaymentBump = escrowPaymentBump
+        self.freeTradeStateBump = freeTradeStateBump
+        self.programAsSignerBump = programAsSignerBump
+        self.buyerPrice = buyerPrice
+        self.tokenSize = tokenSize
+        self.partialOrderSize = partialOrderSize
+        self.partialOrderPrice = partialOrderPrice
+    }
 }
 /**
  * @category Instructions
@@ -66,30 +86,76 @@ public let executePartialSaleStruct = FixableBeetArgsStruct<ExecutePartialSaleIn
 * @category generated
 */
 public struct ExecutePartialSaleInstructionAccounts {
-        let buyer: PublicKey
-        let seller: PublicKey
-        let tokenAccount: PublicKey
-        let tokenMint: PublicKey
-        let metadata: PublicKey
-        let treasuryMint: PublicKey
-        let escrowPaymentAccount: PublicKey
-        let sellerPaymentReceiptAccount: PublicKey
-        let buyerReceiptTokenAccount: PublicKey
-        let authority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let auctionHouseTreasury: PublicKey
-        let buyerTradeState: PublicKey
-        let sellerTradeState: PublicKey
-        let freeTradeState: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
-        let ataProgram: PublicKey?
-        let programAsSigner: PublicKey
-        let rent: PublicKey?
+    let buyer: PublicKey
+    let seller: PublicKey
+    let tokenAccount: PublicKey
+    let tokenMint: PublicKey
+    let metadata: PublicKey
+    let treasuryMint: PublicKey
+    let escrowPaymentAccount: PublicKey
+    let sellerPaymentReceiptAccount: PublicKey
+    let buyerReceiptTokenAccount: PublicKey
+    let authority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let auctionHouseTreasury: PublicKey
+    let buyerTradeState: PublicKey
+    let sellerTradeState: PublicKey
+    let freeTradeState: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+    let ataProgram: PublicKey?
+    let programAsSigner: PublicKey
+    let rent: PublicKey?
+
+    public init(
+        buyer: PublicKey,
+        seller: PublicKey,
+        tokenAccount: PublicKey,
+        tokenMint: PublicKey,
+        metadata: PublicKey,
+        treasuryMint: PublicKey,
+        escrowPaymentAccount: PublicKey,
+        sellerPaymentReceiptAccount: PublicKey,
+        buyerReceiptTokenAccount: PublicKey,
+        authority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        auctionHouseTreasury: PublicKey,
+        buyerTradeState: PublicKey,
+        sellerTradeState: PublicKey,
+        freeTradeState: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil,
+        ataProgram: PublicKey? = nil,
+        programAsSigner: PublicKey,
+        rent: PublicKey? = nil
+    ) {
+        self.buyer = buyer
+        self.seller = seller
+        self.tokenAccount = tokenAccount
+        self.tokenMint = tokenMint
+        self.metadata = metadata
+        self.treasuryMint = treasuryMint
+        self.escrowPaymentAccount = escrowPaymentAccount
+        self.sellerPaymentReceiptAccount = sellerPaymentReceiptAccount
+        self.buyerReceiptTokenAccount = buyerReceiptTokenAccount
+        self.authority = authority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.auctionHouseTreasury = auctionHouseTreasury
+        self.buyerTradeState = buyerTradeState
+        self.sellerTradeState = sellerTradeState
+        self.freeTradeState = freeTradeState
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+        self.ataProgram = ataProgram
+        self.programAsSigner = programAsSigner
+        self.rent = rent
+    }
 }
 
-public let executePartialSaleInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 101] as [UInt8]
+public let executePartialSaleInstructionDiscriminator = [163, 18, 35, 157, 49, 164, 203, 133] as [UInt8]
 
 /**
 * Creates a _ExecutePartialSale_ instruction.

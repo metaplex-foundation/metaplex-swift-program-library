@@ -6,8 +6,8 @@
  */
 import Foundation
 import Beet
-import BeetSolana
 import Solana
+import BeetSolana
 
 
 /**

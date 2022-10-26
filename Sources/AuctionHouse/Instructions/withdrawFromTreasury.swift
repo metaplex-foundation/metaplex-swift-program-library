@@ -16,6 +16,14 @@ import Solana
 public struct WithdrawFromTreasuryInstructionArgs{
     let instructionDiscriminator: [UInt8] /* size: 8 */
     let amount: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = withdrawFromTreasuryInstructionDiscriminator,
+        amount: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.amount = amount
+    }
 }
 /**
  * @category Instructions
@@ -42,16 +50,34 @@ public let withdrawFromTreasuryStruct = FixableBeetArgsStruct<WithdrawFromTreasu
 * @category generated
 */
 public struct WithdrawFromTreasuryInstructionAccounts {
-        let treasuryMint: PublicKey
-        let authority: PublicKey
-        let treasuryWithdrawalDestination: PublicKey
-        let auctionHouseTreasury: PublicKey
-        let auctionHouse: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
+    let treasuryMint: PublicKey
+    let authority: PublicKey
+    let treasuryWithdrawalDestination: PublicKey
+    let auctionHouseTreasury: PublicKey
+    let auctionHouse: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+
+    public init(
+        treasuryMint: PublicKey,
+        authority: PublicKey,
+        treasuryWithdrawalDestination: PublicKey,
+        auctionHouseTreasury: PublicKey,
+        auctionHouse: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil
+    ) {
+        self.treasuryMint = treasuryMint
+        self.authority = authority
+        self.treasuryWithdrawalDestination = treasuryWithdrawalDestination
+        self.auctionHouseTreasury = auctionHouseTreasury
+        self.auctionHouse = auctionHouse
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+    }
 }
 
-public let withdrawFromTreasuryInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 119] as [UInt8]
+public let withdrawFromTreasuryInstructionDiscriminator = [0, 164, 86, 76, 56, 72, 12, 170] as [UInt8]
 
 /**
 * Creates a _WithdrawFromTreasury_ instruction.

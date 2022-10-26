@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -19,6 +19,20 @@ public struct BuyInstructionArgs{
     let escrowPaymentBump: UInt8
     let buyerPrice: UInt64
     let tokenSize: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = buyInstructionDiscriminator,
+        tradeStateBump: UInt8,
+        escrowPaymentBump: UInt8,
+        buyerPrice: UInt64,
+        tokenSize: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.tradeStateBump = tradeStateBump
+        self.escrowPaymentBump = escrowPaymentBump
+        self.buyerPrice = buyerPrice
+        self.tokenSize = tokenSize
+    }
 }
 /**
  * @category Instructions
@@ -54,23 +68,55 @@ public let buyStruct = FixableBeetArgsStruct<BuyInstructionArgs>(
 * @category generated
 */
 public struct BuyInstructionAccounts {
-        let wallet: PublicKey
-        let paymentAccount: PublicKey
-        let transferAuthority: PublicKey
-        let treasuryMint: PublicKey
-        let tokenAccount: PublicKey
-        let metadata: PublicKey
-        let escrowPaymentAccount: PublicKey
-        let authority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let buyerTradeState: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
-        let rent: PublicKey?
+    let wallet: PublicKey
+    let paymentAccount: PublicKey
+    let transferAuthority: PublicKey
+    let treasuryMint: PublicKey
+    let tokenAccount: PublicKey
+    let metadata: PublicKey
+    let escrowPaymentAccount: PublicKey
+    let authority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let buyerTradeState: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+    let rent: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        paymentAccount: PublicKey,
+        transferAuthority: PublicKey,
+        treasuryMint: PublicKey,
+        tokenAccount: PublicKey,
+        metadata: PublicKey,
+        escrowPaymentAccount: PublicKey,
+        authority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        buyerTradeState: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil,
+        rent: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.paymentAccount = paymentAccount
+        self.transferAuthority = transferAuthority
+        self.treasuryMint = treasuryMint
+        self.tokenAccount = tokenAccount
+        self.metadata = metadata
+        self.escrowPaymentAccount = escrowPaymentAccount
+        self.authority = authority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.buyerTradeState = buyerTradeState
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+        self.rent = rent
+    }
 }
 
-public let buyInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 98] as [UInt8]
+public let buyInstructionDiscriminator = [102, 6, 61, 18, 1, 218, 235, 234] as [UInt8]
 
 /**
 * Creates a _Buy_ instruction.

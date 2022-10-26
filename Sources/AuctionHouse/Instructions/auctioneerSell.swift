@@ -19,6 +19,20 @@ public struct AuctioneerSellInstructionArgs{
     let freeTradeStateBump: UInt8
     let programAsSignerBump: UInt8
     let tokenSize: UInt64
+
+    public init(
+        instructionDiscriminator: [UInt8] /* size: 8 */ = auctioneerSellInstructionDiscriminator,
+        tradeStateBump: UInt8,
+        freeTradeStateBump: UInt8,
+        programAsSignerBump: UInt8,
+        tokenSize: UInt64
+    ) {
+        self.instructionDiscriminator = instructionDiscriminator
+        self.tradeStateBump = tradeStateBump
+        self.freeTradeStateBump = freeTradeStateBump
+        self.programAsSignerBump = programAsSignerBump
+        self.tokenSize = tokenSize
+    }
 }
 /**
  * @category Instructions
@@ -54,23 +68,55 @@ public let auctioneerSellStruct = FixableBeetArgsStruct<AuctioneerSellInstructio
 * @category generated
 */
 public struct AuctioneerSellInstructionAccounts {
-        let wallet: PublicKey
-        let tokenAccount: PublicKey
-        let metadata: PublicKey
-        let authority: PublicKey
-        let auctioneerAuthority: PublicKey
-        let auctionHouse: PublicKey
-        let auctionHouseFeeAccount: PublicKey
-        let sellerTradeState: PublicKey
-        let freeSellerTradeState: PublicKey
-        let ahAuctioneerPda: PublicKey
-        let programAsSigner: PublicKey
-        let tokenProgram: PublicKey?
-        let systemProgram: PublicKey?
-        let rent: PublicKey?
+    let wallet: PublicKey
+    let tokenAccount: PublicKey
+    let metadata: PublicKey
+    let authority: PublicKey
+    let auctioneerAuthority: PublicKey
+    let auctionHouse: PublicKey
+    let auctionHouseFeeAccount: PublicKey
+    let sellerTradeState: PublicKey
+    let freeSellerTradeState: PublicKey
+    let ahAuctioneerPda: PublicKey
+    let programAsSigner: PublicKey
+    let tokenProgram: PublicKey?
+    let systemProgram: PublicKey?
+    let rent: PublicKey?
+
+    public init(
+        wallet: PublicKey,
+        tokenAccount: PublicKey,
+        metadata: PublicKey,
+        authority: PublicKey,
+        auctioneerAuthority: PublicKey,
+        auctionHouse: PublicKey,
+        auctionHouseFeeAccount: PublicKey,
+        sellerTradeState: PublicKey,
+        freeSellerTradeState: PublicKey,
+        ahAuctioneerPda: PublicKey,
+        programAsSigner: PublicKey,
+        tokenProgram: PublicKey? = nil,
+        systemProgram: PublicKey? = nil,
+        rent: PublicKey? = nil
+    ) {
+        self.wallet = wallet
+        self.tokenAccount = tokenAccount
+        self.metadata = metadata
+        self.authority = authority
+        self.auctioneerAuthority = auctioneerAuthority
+        self.auctionHouse = auctionHouse
+        self.auctionHouseFeeAccount = auctionHouseFeeAccount
+        self.sellerTradeState = sellerTradeState
+        self.freeSellerTradeState = freeSellerTradeState
+        self.ahAuctioneerPda = ahAuctioneerPda
+        self.programAsSigner = programAsSigner
+        self.tokenProgram = tokenProgram
+        self.systemProgram = systemProgram
+        self.rent = rent
+    }
 }
 
-public let auctioneerSellInstructionDiscriminator = [103, 108, 111, 98, 97, 108, 58, 97] as [UInt8]
+public let auctioneerSellInstructionDiscriminator = [251, 60, 142, 195, 121, 203, 26, 183] as [UInt8]
 
 /**
 * Creates a _AuctioneerSell_ instruction.
