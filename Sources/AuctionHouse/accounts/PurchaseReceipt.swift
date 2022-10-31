@@ -6,8 +6,8 @@
  */
 import Foundation
 import Beet
-import Solana
 import BeetSolana
+import Solana
 
 
 /**
@@ -36,7 +36,7 @@ public protocol PurchasereceiptArgs {
  * @category generated
  */
 public struct Purchasereceipt: PurchasereceiptArgs {
-  public static let purchaseReceiptDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+  public static let purchaseReceiptDiscriminator = [79, 127, 222, 137, 154, 131, 150, 134] as [UInt8]
 
   public let purchaseReceiptDiscriminator: [UInt8]
   public let bookkeeper: PublicKey

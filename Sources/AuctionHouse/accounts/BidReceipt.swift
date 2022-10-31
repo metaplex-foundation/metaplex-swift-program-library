@@ -40,7 +40,7 @@ public protocol BidreceiptArgs {
  * @category generated
  */
 public struct Bidreceipt: BidreceiptArgs {
-  public static let bidReceiptDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+  public static let bidReceiptDiscriminator = [186, 150, 141, 135, 59, 122, 39, 99] as [UInt8]
 
   public let bidReceiptDiscriminator: [UInt8]
   public let tradeState: PublicKey
