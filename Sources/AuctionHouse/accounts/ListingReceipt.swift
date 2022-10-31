@@ -39,7 +39,7 @@ public protocol ListingreceiptArgs {
  * @category generated
  */
 public struct Listingreceipt: ListingreceiptArgs {
-  public static let listingReceiptDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+  public static let listingReceiptDiscriminator = [240, 71, 225, 94, 200, 75, 84, 231] as [UInt8]
 
   public let listingReceiptDiscriminator: [UInt8]
   public let tradeState: PublicKey

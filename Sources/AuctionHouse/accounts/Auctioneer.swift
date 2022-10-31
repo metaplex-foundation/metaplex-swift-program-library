@@ -30,7 +30,7 @@ public protocol AuctioneerArgs {
  * @category generated
  */
 public struct Auctioneer: AuctioneerArgs {
-  public static let auctioneerDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+  public static let auctioneerDiscriminator = [46, 101, 92, 150, 138, 30, 245, 120] as [UInt8]
 
   public let auctioneerDiscriminator: [UInt8]
   public let auctioneerAuthority: PublicKey

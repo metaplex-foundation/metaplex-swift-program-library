@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import BeetSolana
 import Solana
+import BeetSolana
 import Beet
 
 
@@ -44,7 +44,7 @@ public protocol AuctionhouseArgs {
  * @category generated
  */
 public struct Auctionhouse: AuctionhouseArgs {
-  public static let auctionHouseDiscriminator = [97, 99, 99, 111, 117, 110, 116, 58] as [UInt8]
+  public static let auctionHouseDiscriminator = [40, 108, 215, 107, 213, 85, 245, 48] as [UInt8]
 
   public let auctionHouseDiscriminator: [UInt8]
   public let auctionHouseFeeAccount: PublicKey
