@@ -8,7 +8,7 @@ import Solana
 * @category generated
 */
 
-let PROGRAM_ADDRESS = ""
+let PROGRAM_ADDRESS = "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ"
 
 /**
 * Program public key
