@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -76,7 +76,7 @@ public let updateCandyMachineInstructionDiscriminator = [243, 251, 124, 156, 211
 * @category generated
 */
 public func createUpdateCandyMachineInstruction(accounts: UpdateCandyMachineInstructionAccounts, 
-args: UpdateCandyMachineInstructionArgs, programId: PublicKey=PublicKey(string: "")!) -> TransactionInstruction {
+args: UpdateCandyMachineInstructionArgs, programId: PublicKey=PublicKey(string: "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ")!) -> TransactionInstruction {
 
     let data = updateCandyMachineStruct.serialize(
             instance: ["instructionDiscriminator": updateCandyMachineInstructionDiscriminator,
