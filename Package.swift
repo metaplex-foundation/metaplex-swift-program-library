@@ -15,6 +15,10 @@ let package = Package(
         .library(
             name: "CandyMachine",
             targets: ["CandyMachine"]
+        ),
+        .library(
+            name: "TokenMetadata",
+            targets: ["TokenMetadata"]
         )
     ],
     dependencies: [
@@ -40,6 +44,13 @@ let package = Package(
                 .product(name: "BeetSolana", package: "solita-swift")
             ]
         ),
+        .target(
+            name: "TokenMetadata",
+            dependencies: [
+                .product(name: "Beet", package: "beet-swift"),
+                .product(name: "BeetSolana", package: "solita-swift")
+            ]
+        ),
         .testTarget(
             name: "AuctionHouseTests",
             dependencies: []
@@ -48,5 +59,9 @@ let package = Package(
             name: "CandyMachineTests",
             dependencies: []
         ),
+        .testTarget(
+            name: "TokenMetadataTests",
+            dependencies: []
+        )
     ]
 )
