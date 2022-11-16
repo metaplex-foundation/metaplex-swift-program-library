@@ -88,7 +88,7 @@ public let removeCollectionInstructionDiscriminator = [223, 52, 106, 217, 61, 22
 * @category generated
 */
 public func createRemoveCollectionInstruction(accounts: RemoveCollectionInstructionAccounts, 
-programId: PublicKey=PublicKey(string: "")!) -> TransactionInstruction {
+programId: PublicKey=PublicKey(string: "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ")!) -> TransactionInstruction {
 
     let data = removeCollectionStruct.serialize(
             instance: ["instructionDiscriminator": removeCollectionInstructionDiscriminator ])

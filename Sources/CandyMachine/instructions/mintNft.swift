@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Solana
 import Beet
+import Solana
 
 /**
  * @category Instructions
@@ -125,7 +125,7 @@ public let mintNftInstructionDiscriminator = [211, 57, 6, 167, 15, 219, 35, 251]
 * @category generated
 */
 public func createMintNftInstruction(accounts: MintNftInstructionAccounts, 
-args: MintNftInstructionArgs, programId: PublicKey=PublicKey(string: "")!) -> TransactionInstruction {
+args: MintNftInstructionArgs, programId: PublicKey=PublicKey(string: "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ")!) -> TransactionInstruction {
 
     let data = mintNftStruct.serialize(
             instance: ["instructionDiscriminator": mintNftInstructionDiscriminator,

@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita-swift
  */
 import Foundation
-import Beet
 import Solana
+import Beet
 
 /**
  * @category Instructions
@@ -104,7 +104,7 @@ public let setCollectionDuringMintInstructionDiscriminator = [103, 17, 200, 25, 
 * @category generated
 */
 public func createSetCollectionDuringMintInstruction(accounts: SetCollectionDuringMintInstructionAccounts, 
-programId: PublicKey=PublicKey(string: "")!) -> TransactionInstruction {
+programId: PublicKey=PublicKey(string: "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ")!) -> TransactionInstruction {
 
     let data = setCollectionDuringMintStruct.serialize(
             instance: ["instructionDiscriminator": setCollectionDuringMintInstructionDiscriminator ])

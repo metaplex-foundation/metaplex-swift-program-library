@@ -86,7 +86,7 @@ public let initializeCandyMachineInstructionDiscriminator = [142, 137, 167, 107,
 * @category generated
 */
 public func createInitializeCandyMachineInstruction(accounts: InitializeCandyMachineInstructionAccounts, 
-args: InitializeCandyMachineInstructionArgs, programId: PublicKey=PublicKey(string: "")!) -> TransactionInstruction {
+args: InitializeCandyMachineInstructionArgs, programId: PublicKey=PublicKey(string: "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ")!) -> TransactionInstruction {
 
     let data = initializeCandyMachineStruct.serialize(
             instance: ["instructionDiscriminator": initializeCandyMachineInstructionDiscriminator,

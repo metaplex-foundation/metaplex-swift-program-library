@@ -76,7 +76,7 @@ public let addConfigLinesInstructionDiscriminator = [223, 50, 224, 227, 151, 8, 
 * @category generated
 */
 public func createAddConfigLinesInstruction(accounts: AddConfigLinesInstructionAccounts, 
-args: AddConfigLinesInstructionArgs, programId: PublicKey=PublicKey(string: "")!) -> TransactionInstruction {
+args: AddConfigLinesInstructionArgs, programId: PublicKey=PublicKey(string: "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ")!) -> TransactionInstruction {
 
     let data = addConfigLinesStruct.serialize(
             instance: ["instructionDiscriminator": addConfigLinesInstructionDiscriminator,

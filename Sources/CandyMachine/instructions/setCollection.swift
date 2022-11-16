@@ -102,7 +102,7 @@ public let setCollectionInstructionDiscriminator = [192, 254, 206, 76, 168, 182,
 * @category generated
 */
 public func createSetCollectionInstruction(accounts: SetCollectionInstructionAccounts, 
-programId: PublicKey=PublicKey(string: "")!) -> TransactionInstruction {
+programId: PublicKey=PublicKey(string: "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ")!) -> TransactionInstruction {
 
     let data = setCollectionStruct.serialize(
             instance: ["instructionDiscriminator": setCollectionInstructionDiscriminator ])
