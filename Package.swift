@@ -15,12 +15,16 @@ let package = Package(
         .library(
             name: "CandyMachine",
             targets: ["CandyMachine"]
+        ),
+        .library(
+            name: "TokenMetadata",
+            targets: ["TokenMetadata"]
         )
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/metaplex-foundation/beet-swift", branch: "1.0.4"),
+        .package(url: "https://github.com/metaplex-foundation/beet-swift", branch: "1.0.7"),
         .package(url: "https://github.com/metaplex-foundation/solita-swift.git", branch: "1.0.3")
     ],
     targets: [
@@ -40,12 +44,23 @@ let package = Package(
                 .product(name: "BeetSolana", package: "solita-swift")
             ]
         ),
+        .target(
+            name: "TokenMetadata",
+            dependencies: [
+                .product(name: "Beet", package: "beet-swift"),
+                .product(name: "BeetSolana", package: "solita-swift")
+            ]
+        ),
         .testTarget(
             name: "AuctionHouseTests",
             dependencies: []
         ),
         .testTarget(
             name: "CandyMachineTests",
+            dependencies: []
+        ),
+        .testTarget(
+            name: "TokenMetadataTests",
             dependencies: []
         ),
     ]
