@@ -21,6 +21,10 @@ let package = Package(
             targets: ["CandyMachineCore"]
         ),
         .library(
+            name: "CandyGuard",
+            targets: ["CandyGuard"]
+        ),
+        .library(
             name: "TokenMetadata",
             targets: ["TokenMetadata"]
         )
@@ -43,6 +47,13 @@ let package = Package(
         ),
         .target(
             name: "CandyMachine",
+            dependencies: [
+                .product(name: "Beet", package: "beet-swift"),
+                .product(name: "BeetSolana", package: "solita-swift")
+            ]
+        ),
+        .target(
+            name: "CandyGuard",
             dependencies: [
                 .product(name: "Beet", package: "beet-swift"),
                 .product(name: "BeetSolana", package: "solita-swift")
